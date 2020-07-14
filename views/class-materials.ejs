@@ -220,7 +220,7 @@
                         <% let select = res.select.toString(); %>
                         <% if(select === '0' && res.isPinned === true) { %>
                             <div class=" p-2 m-2"
-                                 style="background-color: whitesmoke; border-radius: 5px;">
+                                 style="background-color: rgb(3, 25, 85); border-radius: 5px;">
                                 <div class="row m-1">
                                     <div class="col-10">
                                         <div class="row">
@@ -236,7 +236,7 @@
                                                 <% } %>
 
                                             </div>
-                                            <div style="margin-left: 12px">
+                                            <div style="margin-left: 12px;">
                                                 <p class="text-light mt-2 shadow-lg"><%= user.name %>
                                                     <span><sup><strong><%= res.date %></strong></sup></span></p>
                                             </div>
@@ -814,7 +814,7 @@
                     <% if (res != null){ %>
                         <% let select = res.select.toString(); %>
                         <div class="p-2 m-2"
-                             style="background-color: rgb(37,80,112); border-radius: 5px;">
+                             style="background-color: rgb(22, 22, 58); border-radius: 5px;">
                             <% if(select === '0') { %>
                                 <div class="row m-1">
                                     <div class="thumbnail1">
@@ -828,7 +828,7 @@
                                                  class="rounded-circle">
                                         <% } %>
                                     </div>
-                                    <div style="margin-left: 12px">
+                                    <div style="margin-left: 12px;">
                                         <p class="shadow-lg mt-2"><%= join.owner_name %>
                                             <span><sup><strong><%= res.date %></strong></sup></span></p>
                                     </div>
