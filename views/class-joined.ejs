@@ -1,0 +1,64 @@
+<!--
+<%- include('./partials/nav-sidebar') %>
+
+
+<section class="py-4">
+    <div class="container my-4">
+        <%- include('./partials/messages') %>
+        <h4 class="text-light bg-primary p-2"
+            style="font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; border-radius: 5px">
+            JOINED CLASSES</h4>
+        <div class="row">
+            <% joined.forEach(element=>{ %>
+                <% let ID = element.join %>
+                <% let joinedID = ID.toString(); %>
+                <% details.forEach(value=>{ %>
+                    <% let id = value.id %>
+                    <% let taskID = id.toString(); %>
+                    <% if (taskID == joinedID) { %>
+                        <div class="col-lg-4 mb-3">
+                            <div class="card shadow"
+                                 style="background-color: rgb(124, 55, 189); background-image: url(../public/images/class_room.jpg)">
+                                <div class="card-header">
+                                    <div class="row p-1">
+                                        <div class="col-md-8">
+                                            <div style="position: relative;margin: 5px">
+                                                <a href="/showclass/<%= value._id %>"><h3
+                                                            class="text-light"><%= value.classname %></h3></a>
+                                                <p class="text-warning"><%= element.owner_name%></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img src="<%= `uploads/${element.owner_profile_picture}` %>" height="60" width="60"
+                                                 class="rounded-circle mt-2" alt="Owner Profile">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body" style="background-color: rgb(202, 207, 218);">
+                                    <h5 class="card-title text-primary"><strong><%= value.batch %></strong></h5>
+                                    <% let topic = value.topic; %>
+                                    <% len = topic.length; %>
+                                    <% if (len > 40) { %>
+                                        <% let result = topic.substring(0, 40); %>
+                                        <p class="card-text"><%= result %><span>...</span></p>
+                                    <% } else { %>
+                                        <p class="card-text pb-4"><%= topic %></p>
+                                    <% } %>
+
+                                </div>
+                                <div class="card-footer" style="background-color: rgb(214, 197, 197);">
+                                    <div class="icons" style="height: 35px;">
+                                        <a href="#"><i class="fa fa-folder text-secondary"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+
+                <% }) %>
+            <% }) %>
+        </div>
+    </div>
+</section>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="../public/js/google-sign-in.js"></script>-->

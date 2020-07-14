@@ -1,0 +1,205 @@
+<%- include('./partials/nav-sidebar') %>
+
+<section>
+    <div class="container mt-3 align-content-center">
+        <div class="row text-light">
+            <div class="col-md-8">
+                <p class="text-light uk-text-bold" style="font-size: 25px">Last Date : <strong
+                            style="color: #7abaff;font-family: Ubuntu"><%= result.Due %></strong></p>
+            </div>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div style="width: 40%;">
+            <%- include('./partials/messages') %>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container align-content-center">
+        <div class="row">
+            <div style="float: left; width: 60%;" class="text-light mt-2 mr-1">
+                <div class="text-light p-2" style="background-color: rgb(73,62,84); border-radius: 5px;">
+                    <div class="row m-1">
+                        <div class="col-10">
+                            <div class="row">
+                                <div style="">
+                                    <p class="text-light mt-2 shadow-lg"
+                                       style="font-size: 25px;font-family: 'Droid Sans Mono'">
+                                        <%= result.assignmentTopic %></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-1">
+                        <div class="col-md-12">
+                            <div class="row p-2"
+                                 style="background:#56455f; border-radius: 3px;"
+                                 onMouseOver="this.style.background='#5b4964'"
+                                 onMouseOut="this.style.background='#56455f'">
+                                <%- result.topic %>
+                            </div>
+                        </div>
+                    </div>
+                    <% if (submitAssignment){ %>
+                        <div class="row m-1">
+                            <div class="col-md-12">
+                                <div class="row"
+                                     style="background:#1f5f44; border-radius: 3px;">
+                                    <div class="col-md-2">
+                                        <i class="fa fa-file-archive" style="font-size: 42px;color: #54b6ee"></i>
+                                    </div>
+                                    <div class="col-md-7"><a
+                                                href="<%= `../public/uploads/${submitAssignment.files[0].filename}` %>">
+                                            <small style="font-size: 25px;color: white;overflow-wrap: break-word;font-family: 'Ubuntu Mono'">
+                                                <%= submitAssignment.files[0].originalname %></small></a>
+                                    </div>
+                                    <div class="col-md-3 text-light">
+                                        <form method="get" name="myFrom"
+                                              action="/deletesubmittedassignment/<%= submitAssignment._id %><%= result._id %>"
+                                              onclick="deleteTask(event)">
+                                            <div style="float: right" class="text-light mt-1">
+                                                <button class="btn btn-primary btn-sm" type="submit"><i
+                                                            class="fa fa-trash"></i>Delete
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <h3 class="text-light">You do not upload something</h3>
+                    <% } %>
+                </div>
+            </div>
+
+            <% if (submitAssignment){ %>
+                <div class="text-light p-3 mt-2"
+                     style="float: right; width: 330px; background-color: rgb(74,57,149); border-radius: 5px;pointer-events:none; opacity: .4;">
+                    <div class="form-group">
+                        <label for="topic">Write any issues?</label>
+                        <textarea rows="4" id="topic" name="issue" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="option">Tag you and your multiple friend's if have?</label>
+                        <select class="selectpicker" id="option" name="option" multiple data-live-search="true"
+                                data-live-search-placeholder="Search" data-actions-box="true" required>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="file">Add have any files</label>
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="custom-file-input-style btn-group-sm">
+                                    <input type="file" name="submit_files">
+                                    <input type="button" value="Attach File" class="btn text-light"
+                                           style="background:#8931d6;margin-top: 2px">
+                                </div>
+                            </div>
+                            <div class="col-6 position-relative">
+                                <p id="text" class="text-light position-absolute" style="font-size: 18px">No file
+                                    selected</p>
+                                <p style="width: 190px;height: 2px;background: #4a86ba;margin-top: 30px"
+                                   class="position-absolute"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="SUBMIT" class="btn text-light"
+                               style="background-color: #5f6ab1" onMouseOver="this.style.background='#2d95c5'"
+                               onMouseOut="this.style.background='#5f6ab1'">
+                    </div>
+                </div>
+            <% }else { %>
+                <div class="text-light p-3 mt-2"
+                     style="float: right; width: 330px; background-color: rgb(74,57,149); border-radius: 5px;">
+                    <form action="/submitassignment/<%= result._id %><%= classID %>" method="POST"
+                          enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="topic">Write any issues?</label>
+                            <textarea rows="4" id="topic" name="issue" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="option">Tag you and your multiple friend's if have?</label>
+                            <select class="selectpicker" id="option" name="option" multiple data-live-search="true"
+                                    data-live-search-placeholder="Search" data-actions-box="true" required>
+                                <% UserInfoArray.forEach(user => { %>
+                                    <option value="<%= user.email %>"><%= user.registration %></option>
+                                <% }) %>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="file">Add have any files</label>
+                            <div class="row">
+                                <div class="col-4">
+                                    <div class="custom-file-input-style btn-group-sm">
+                                        <input type="file" name="submit_files">
+                                        <input type="button" value="Attach File" class="btn text-light"
+                                               style="background:#8931d6;margin-top: 2px">
+                                    </div>
+                                </div>
+                                <div class="col-6 position-relative">
+                                    <p id="text" class="text-light position-absolute" style="font-size: 18px">No file
+                                        selected</p>
+                                    <p style="width: 190px;height: 2px;background: #4a86ba;margin-top: 30px"
+                                       class="position-absolute"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="SUBMIT" class="btn text-light"
+                                   style="background-color: #5f6ab1" onMouseOver="this.style.background='#2d95c5'"
+                                   onMouseOut="this.style.background='#5f6ab1'">
+                        </div>
+                    </form>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.custom-file-input-style input[type="file"]').change(function (e) {
+            let text = document.getElementById('text');
+            text.innerHTML = e.target.files[0].name;
+        });
+    });
+</script>
+
+<script>
+    function deleteTask(event) {
+        event.preventDefault(); // prevent form submit
+        let form = document.forms["myFrom"]; // storing the form
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover your file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                } else {
+                    swal({
+                        text: "Your files are safe!"
+                    });
+                    $(".swal-text").css('color', '#fff');
+                    $(".swal-button").css('background-color', '#5bff20');
+                }
+            });
+        $(".swal-text").css('color', '#fff');
+        $(".swal-title").css('color', 'yellow');
+        $(".swal-modal").css('background-color', '#3f69ac');
+    }
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+
+

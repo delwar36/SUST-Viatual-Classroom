@@ -1,0 +1,85 @@
+<%- include('./partials/nav-sidebar') %>
+<section>
+    <div class="container">
+        <div class="row justify-content-center align-self-center m-4">
+            <ul class="nav nav-tabs nav-justified" style="font-family: Ubuntu">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= linkStream %>">Stream</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= linkClassWork %>">Class Work</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="<%= path_clone %>">Students</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Mark</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row justify-content-center align-self-center" style="margin-top: 25px;">
+            <% let joinedCount = 0; %>
+
+            <% classUser.forEach(user => { %>
+                <% let userID = user._id.toString(); %>
+                <% joinResult.forEach(join => { %>
+                    <% let joinerID = join.joiner.toString(); %>
+                    <% if (userID === joinerID){ %>
+                        <% joinedCount++; %>
+                    <% } %>
+                <% }) %>
+            <% }) %>
+            <h2 class="text-light" style="font-family: 'Ubuntu Mono';margin-left: 30px">Total Students :
+                <strong><%= joinedCount %></strong></h2>
+            <div style="width: 66%;margin-left: 7px">
+                <%- include('./partials/messages') %>
+            </div>
+
+            <% classUser.forEach(user => { %>
+                <% let userID = user._id.toString(); %>
+                <% joinResult.forEach(join => { %>
+                    <% let joinerID = join.joiner.toString(); %>
+                    <% if (userID === joinerID){ %>
+                        <div style="background:#4f4156;border-radius: 5px;margin: 3px;width: 70%;">
+                            <div class="row">
+                                <div class="col-md-2 thumbnail_medium">
+                                    <%if(user.profile_picture){%>
+                                        <img src="<%= `../public/uploads/${user.profile_picture}` %>"
+                                             class="rounded-circle" style="margin-top: 12px; margin-left: 20px" alt="Image">
+                                    <%}else{%>
+                                            <img src="../public/images/default_image.ico"
+                                                 class="rounded-circle" style="margin-top: 12px; margin-left: 20px" alt="Image">
+                                    <%}%>
+
+                                </div>
+                                <div style="height: 92px;width: 2px;background:#74a8ff;"></div>
+                                <div class="col-md-5">
+                                   <div class="mt-2">
+                                       <strong class="text-light">Name : </strong><span
+                                               style="color: #b7e5ff"><%= user.name %></span><br>
+                                       <strong class="text-light">Registration Number : </strong><span
+                                               style="color: #b7e5ff"><%= user.registration %></span><br>
+                                       <strong class="text-light">Email : </strong><span
+                                               style="color: #b7e5ff"><%= user.email %></span>
+                                   </div>
+
+                                </div>
+                                <div style="height: 92px;width: 2px;background:#74a8ff;"></div>
+                                <div class="col-md-4">
+                                    <h3 class="text-light mt-4">Joined : <strong><%= join.date %></strong></h3>
+                                </div>
+                            </div>
+                        </div>
+                    <% } %>
+                <% }) %>
+            <% }) %>
+        </div>
+
+    </div>
+</section>
+

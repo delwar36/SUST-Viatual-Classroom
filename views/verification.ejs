@@ -1,0 +1,59 @@
+<%- include('./partials/nav-sidebar') %>
+<section>
+    <div class="container">
+        <div class="row justify-content-center align-self-center">
+            <div class="col-md-10 col-lg-8">
+                <%- include('./partials/messages') %>
+            </div>
+
+        </div>
+    </div>
+</section>
+<section class="mb-2">
+    <div class="container">
+        <div class="row justify-content-center align-self-center" style="margin-top: 100px">
+            <div class="col-md-8 col-lg-5" style="background-color: #0d64bc;border-radius: 5px;padding: 20px">
+                <form action="/user/uploadverificationcode/<%= id %>" method="POST"
+                      onsubmit="return validateForm()">
+                    <div class="form-group">
+                        <label style="font-family: 'Ubuntu Mono';font-size: 20px" class="text-light"
+                               for="verification">
+                            Verification Code</label>
+                        <input type="text" id="verification" class="form-control" name="verification"
+                               placeholder="Give your verification code" autocomplete="off">
+                    </div>
+                    <div class="form-group btn-group">
+                        <button type="submit" class="btn btn-success"><i class="fa fa-check-circle">Verify Code</i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script>
+    function validateForm() {
+        let verification = document.getElementById('verification').value;
+        if (verification === "") {
+            swal({
+                icon: "warning",
+                text: "You did not give any code!",
+                value: true,
+                visible: true,
+                className: "",
+                closeModal: true,
+                button: {
+                    text: "OK",
+                },
+            });
+            $(".swal-button").css('background-color', 'red');
+            $(".swal-button").css('border', '3px solid red');
+            $(".swal-text").css('color', '#fff')
+            $(".swal-modal").css('background-color', '#3f69ac');
+            $(".swal-container.in").css('background-color', 'rgba(152,186,16,0.45)');
+            return false;
+        }
+    }
+
+</script>

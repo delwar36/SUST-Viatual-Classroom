@@ -1,0 +1,293 @@
+<nav class="navbar navbar-dark navbar-expand-md"
+     uk-sticky="top: 200; animation: uk-animation-slide-top; bottom: #sticky-on-scroll-up">
+    <div class="container">
+        <a href="javascript:;" class="toggle mr-4 text-light" id="sidenav-toggle">
+            <span class="navbar-toggler-icon "></span>
+        </a>
+
+        <a href="/dashboard-classes" class="navbar-brand text-light">
+            <img src="../public/images/web.png" alt="web_name" class="img-fluid" width="30px" height="30px">
+            <b style="margin-left: .5rem;font-family:'Fira Code Light'">SUST CLASSROOM</b></a>
+        <div id="navbarNav" class="navbar-collapse">
+            <ul class="navbar-nav ml-auto">
+
+                <% if(path === '/' || path === '/sign-up' || path === '/login' || path === '/register' || path === '/verify' || path === '/updatepassword' || path === '/updateyourpassword'){ %>
+                    <li class="nav-item uk-hidden">
+                        <div class="dropdown">
+                            <button type="button" onclick="myFunction()" class="dropbtn btn btn-primary"
+                                    data-toggle="tooltip" data-placement="bottom" title="Create or Join a class"><i
+                                        class="fa fa-plus"></i>Create/Join
+                            </button>
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="" data-toggle="modal" data-target="#create"><i class="fa fa-plus-square"></i>Create</a>
+
+                                <a href=""><i class="fa fa-address-book" data-target="#join"
+                                              style="margin-right: 18px;"></i>Join</a>
+                            </div>
+                        </div>
+                    </li>
+
+                <% } else { %>
+                    <li class="nav-item">
+                        <div class="dropdown">
+                            <button type="button" onclick="myFunction()" class="dropbtn btn btn-primary"
+                                    data-toggle="tooltip" data-placement="bottom" title="Create or Join a class"><i
+                                        class="fa fa-plus"></i>Create/Join
+                            </button>
+                            <div id="myDropdown" class="dropdown-content">
+                                <a href="" data-toggle="modal" data-target="#create"><i
+                                            class="fa fa-plus-square" style="margin-right: 8px; font-size: 18px"></i>Create</a>
+                                <a href="" data-toggle="modal" data-target="#join"><i
+                                            class="fa fa-address-book" style="margin-right: 8px;"></i>Join</a>
+
+                            </div>
+                        </div>
+                    </li>
+                <% } %>
+                <li class="nav-item"><a class="nav-link" href="/about/ourclassroom">About</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<nav class="sidenav" data-sidenav data-sidenav-toggle="#sidenav-toggle" style="background-color: rgb(70, 62, 62);">
+    <div class="sidenav-brand" style="background-color: rgb(109, 63, 194);">
+
+        <% if(path === '/' || path === '/sign-up' || path === '/login' || path === '/register' || path === '/verification' || path === '/verify' || path === '/updatepassword' || path === '/updateyourpassword'){ %>
+            <img id="picture" src="../public/images/default_image.ico"
+                 alt="Default Profile Image" class="ml-1 rounded-circle"
+                 height="60px" width="60px"><br>
+            <small id="email"
+                   style="font-size: 15px; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Your
+                email</small>
+        <% } else { %>
+            <% if(user != null){ %>
+                <% if(user.profile_picture == null) { %>
+                    <a href="/userupdateprofile"><img id="picture" src="../public/images/default_image.ico"
+                                                  alt="Default Profile Image" class="ml-1 rounded-circle"
+                                                  height="60px" width="60px"></a><br>
+                    <small id="email"
+                           style="font-size: 15px; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"><%= user.email %>
+                    </small>
+                <% } else { %>
+                    <a href="/userupdateprofile">
+                        <div class="thumbnail">
+                            <img src="<%= `../public/uploads/${user.profile_picture}` %>"
+                                 alt="Profile " class="m-1 rounded-circle"
+                                 style="border: 1px solid rgb(123,115,151);">
+                        </div>
+                    </a>
+                    <small style="font-size: 15px; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;"><%= user.email %>
+                    </small>
+                <% } %>
+            <% } else { %>
+                <img id="picture" src="../public/images/default_image.ico" alt="Default Profile Image"
+                     class="ml-1 rounded-circle"
+                     height="60px" width="60px"><br>
+                <small id="email"
+                       style="font-size: 15px; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">Your
+                    email</small>
+            <% } %>
+        <% } %>
+
+    </div>
+
+    <div class="sidenav-header text-light">
+        Teaching
+    </div>
+
+    <ul class="sidenav-menu">
+
+        <% if(path === '/dashboard-classes'){ %>
+            <% if (details != null){ %>
+                <% details.forEach(detail => { %>
+                    <li>
+                        <a href="/showclass/<%= detail._id %>">
+                            <span class="sidenav-link-icon">
+                                <i class="fa fa-address-book"></i>
+                            </span>
+                            <span class="sidenav-link-title"><%= detail.classname %></span>
+                        </a>
+                    </li>
+                <% }) %>
+            <% } %>
+        <% } %>
+
+    </ul>
+
+    <div class="sidenav-header text-light">
+        Enrolled
+    </div>
+    <ul class="sidenav-menu">
+        <% if(path === '/dashboard-classes'){ %>
+            <% if (joined != null){ %>
+                <% joined.forEach(element => { %>
+                    <% let ID = element.join %>
+                    <% let joinedID = ID.toString(); %>
+                    <% joined_details.forEach(value => { %>
+                        <% let id = value.id %>
+                        <% let taskID = id.toString(); %>
+                        <% if (taskID === joinedID) { %>
+                            <li>
+                                <a href="/joined/<%= value._id %>">
+                                     <span class="sidenav-link-icon">
+                                             <i class="fa fa-address-book"></i>
+                                     </span>
+                                    <span class="sidenav-link-title"><%= value.classname %></span>
+                                </a>
+                            </li>
+                        <% } %>
+                    <% }) %>
+                <% }) %>
+            <% } %>
+        <% } %>
+
+    </ul>
+
+    <div class="sidenav-header text-light">
+        Authentication
+    </div>
+    <ul class="sidenav-menu">
+        <% if(path === '/' || path === '/sign-up' || path === '/login' || path === '/register' || path === '/verify'){ %>
+            <li>
+                <a href="/user/register">
+                <span class="sidenav-link-icon">
+                    <i class="material-icons">transform</i>
+                </span>
+                    <span class="sidenav-link-title">Login/Sign up</span>
+                </a>
+            </li>
+        <% } else { %>
+            <li>
+                <a href="/user/logout">
+                    <span class="sidenav-link-icon">
+                    <i class="material-icons">logout</i>
+                    </span>
+                    <span class="sidenav-link-title">Log out</span>
+                </a>
+            </li>
+        <% } %>
+    </ul>
+
+
+    <div class="sidenav-header text-light">
+        Settings
+    </div>
+    <ul class="sidenav-menu">
+        <li>
+            <a href="">
+                <span class="sidenav-link-icon">
+                    <i class="material-icons">settings</i>
+                </span>
+                <span class="sidenav-link-title">Settings</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+
+
+<!-- Create Modal -->
+<div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     style="margin-left: 33%;">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color:#19688E">
+            <div class="modal-header">
+                <h3 class="modal-title" style="color: rgb(218,214,214);" id="exampleModalLongTitle">Create Your New
+                    Class
+                </h3>
+                <button type="button" class="close p-1" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="/newclasscreate" method="POST">
+                <div class="modal-body text-light">
+                    <div class="form-group">
+                        <label for="name" class="control-label">Class name</label>
+                        <input type="text" class="form-control" id="name" name="classname"
+                               value="<%= typeof classname != 'undefined' ? classname : '' %>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="batch" class="control-label">Batch</label>
+                        <input type="text" class="form-control" id="batch" name="batch"
+                               value="<%= typeof batch != 'undefined' ? batch : '' %>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="topic" class="control-label">Topic/Description</label>
+                        <textarea id="topic" name="topic" class="form-control"
+                                  value="<%= typeof topic != 'undefined' ? topic : '' %>" required></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="text-light joined-button px-2"
+                            onMouseOver="this.style.background='rgb(242,157,20)'"
+                            onMouseOut="this.style.background='rgb(242, 114, 2)'"
+                            data-dismiss="modal">Close
+                    </button>
+                    <button type="submit" class="text-light joined-button-submit"
+                            style="background-color: rgb(164,67,255);"
+                            onMouseOver="this.style.background='#4855ff'"
+                            onMouseOut="this.style.background='rgb(164,67,255)'">
+                        Create
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Join Modal -->
+<div class="modal fade" id="join" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+     style="margin-left: 33%; width: 380px">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color:#4D4257">
+            <form action="/joinclass" method="POST">
+                <div class="modal-body text-light">
+                    <div class="input-group-sm">
+                        <label for="name" class="control-label">Enter your class code to join the class room and the see
+                            your tasks and others</label>
+                        <input type="text" class="form-control" id="name" autocomplete="off" name="classcode"
+                               value="<%= typeof classcode != 'undefined' ? classcode : '' %>" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="text-light joined-button"
+                            onMouseOver="this.style.background='rgb(242,157,20)'"
+                            onMouseOut="this.style.background='rgb(242, 114, 2)'"
+                            data-dismiss="modal">Close
+                    </button>
+                    <button type="submit" class="text-light joined-button-submit px-3"
+                            style="background-color:rgb(164,67,255)"
+                            onMouseOver="this.style.background='#4855ff'"
+                            onMouseOut="this.style.background='rgb(164,67,255)'">
+                        Join
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="../public/js/sidenav.min.js"></script>
+<script>$('[data-sidenav]').sidenav();</script>
+<script>
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            let dropdowns = document.getElementsByClassName("dropdown-content");
+            let i;
+            for (i = 0; i < dropdowns.length; i++) {
+                let openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+</script>

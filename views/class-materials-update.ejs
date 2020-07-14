@@ -1,0 +1,143 @@
+<%- include('./partials/nav-sidebar') %>
+<% if (path_clone == 'material'){ %>
+    <section>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col">
+                    <div class="purple-square-container">
+                        <div class="purple-square" style="padding: 25px;border-radius: 15px">
+                            <form action="/classmaterialsupdate/<%= result._id %>" method="POST"
+                                  onsubmit="return validateForm()">
+                                <div class="form-group nopadding">
+                                    <label style="font-family: 'Ubuntu Mono';font-size: 20px" class="text-light"
+                                           for="textarea">Give
+                                        topic/description</label>
+                                    <div class="page-wrapper box-content">
+                                        <textarea class="content" name="topic"
+                                                  id="textarea"><%= result.topic%></textarea>
+                                    </div>
+                                </div>
+                                <div class="row justify-content-center align-self-center mt-3">
+                                    <div class="form-group btn-group-lg">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-upload">Update
+                                                your material</i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<% } %>
+<% if (path_clone == 'assignment'){ %>
+    <section>
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col">
+                    <div class="purple-square-container">
+                        <div class="purple-square" style="padding: 25px;border-radius: 15px">
+                            <form action="/classassignmentsupdate/<%= result._id %>" method="POST"
+                                  onsubmit="return validateForm()">
+                                <div class="form-group nopadding">
+                                    <label style="font-family: 'Ubuntu Mono';font-size: 20px" class="text-light"
+                                           for="textarea">Give
+                                        topic/description</label>
+                                    <div class="page-wrapper box-content">
+                                        <textarea class="content" name="topic"
+                                                  id="textarea" required><%= result.topic%></textarea>
+                                    </div>
+                                </div>
+                                <% let dateTime = result.Due.toString().split('|') %>
+                                <% let date = dateTime[0] %>
+                                <% let time = dateTime[1] %>
+                                <div class="form-group" id="time">
+                                    <label for="time1" style="font-family: 'Ubuntu Mono';font-size: 20px"
+                                           class="text-light">Give Due time</label>
+                                    <input id="time1" name="duetime" data-format="hh:mm A"
+                                           class="form-control sel-time-am" style="width: 300px" placeholder="hh:mm"
+                                           type="text" value="<%= time %>">
+                                </div>
+                                <div class="form-group" id="date">
+                                    <label for="date" style="font-family: 'Ubuntu Mono';font-size: 20px"
+                                           class="text-light">Give
+                                        due date <small>(Previous) : <strong><%= date %></strong></small></label>
+                                    <input type="date" id="date" class="form-control" style="width: 300px" name="due" value="<%= date %>">
+                                </div>
+
+                                <div class="row justify-content-center align-self-center mt-3">
+                                    <div class="form-group btn-group-lg">
+                                        <button type="submit" class="btn btn-primary"><i class="fa fa-upload">Update assignment</i></button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<% }%>
+
+<a id="back2Top" title="Back to top" href="#">&#10148;</a>
+
+<script type="text/javascript" src="http://demo.itsolutionstuff.com/plugin/clockface.js"></script>
+
+<script type="text/javascript">
+    $('.sel-time').clockface({format: 'HH:mm'});
+    $('.sel-time-am').clockface();
+</script>
+<script>
+    $(document).ready(function () {
+        $('.content').richText();
+
+    });
+</script>
+
+<script>
+    $(window).scroll(function () {
+        let height = $(window).scrollTop();
+        if (height > 100) {
+            $('#back2Top').fadeIn();
+        } else {
+            $('#back2Top').fadeOut();
+        }
+    });
+    $(document).ready(function () {
+        $("#back2Top").click(function (event) {
+            event.preventDefault();
+            $("html, body").animate({scrollTop: 0}, "slow");
+            return false;
+        });
+
+    });
+</script>
+<script>
+    function validateForm() {
+        let topic = document.getElementById('textValue').value;
+        if (topic === "") {
+            swal({
+                icon: "warning",
+                text: userName + " : You did not write any comment!",
+                value: true,
+                visible: true,
+                className: "",
+                closeModal: true,
+                button: {
+                    text: "OK",
+                },
+            });
+            $(".swal-button").css('background-color', '#e15c35');
+            $(".swal-text").css('color', '#fff')
+            $(".swal-modal").css('background-color', '#3f69ac');
+            $(".swal-container.in").css('background-color', 'rgba(152,186,16,0.45)');
+            return false;
+        }
+    }
+</script>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+

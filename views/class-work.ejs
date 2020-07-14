@@ -1,0 +1,57 @@
+<%- include('./partials/nav-sidebar') %>
+<section>
+    <div class="container">
+        <div class="row justify-content-center align-self-center m-4">
+            <ul class="nav nav-tabs nav-justified" style="font-family: Ubuntu">
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= linkStream %>">Stream</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="<%= path_clone %>">Class Work</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="<%= linkClassMates %>">Students</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="grades.ejs.html">Mark</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container">
+        <div class="row justify-content-center align-self-center" style="margin-top: 40px;">
+            <div style="width: 66%;margin-left: 7px">
+                <%- include('./partials/messages') %>
+            </div>
+            <% result.forEach(result => { %>
+                <% let select = result.select.toString(); %>
+                <% if (select === '1'){ %>
+                    <div style="border-radius: 5px;margin: 3px;width: 70%;">
+                        <div style="height: 1px;width: 100%;background:#374f77;"></div>
+                        <div class="row">
+                            <div class="col-md-2">
+                               <div style="margin-top: 12px">
+                                   <img src="../public/images/assignment.png" height="40px"
+                                        width="40px">
+                               </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <p class="text-light mt-1" style="font-family: 'Ubuntu Mono';font-size: 30px"
+                                       style="color: #7abaff"><%- result.assignmentTopic %></p>
+                                    <small class="text-light mt-4">Due time : <strong><%= result.Due %></strong></small>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="height: 1px;width: 100%;background:#374f77;"></div>
+                    </div>
+                <% } %>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+
+

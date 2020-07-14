@@ -1,0 +1,48 @@
+.form {
+  width: 40%;
+  position: relative;
+  height: 50px;
+  overflow: hidden;
+}
+.form input {
+  width: 100%;
+  height: 100%;
+  color: chartreuse;
+  padding-top: 15px;
+  border: none;
+  outline: none;
+}
+.form label {
+  position: absolute;
+  bottom: 0px;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  border-bottom: 1px solid black;
+}
+.form label::after {
+  content: "";
+  position: absolute;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  border-bottom: 3px solid rgb(45, 42, 226);
+  transform: translate(-100%);
+}
+.content-name {
+  position: absolute;
+  bottom: 5px;
+  left: 0px;
+  transition: all 0.3s ease;
+}
+.form input:focus + .label-name .content-name,
+.form input:valid + .label-name .content-name {
+  transform: translateY(-150%);
+  font-size: 14px;
+  color: rgb(45, 42, 226);
+}
+
+.form input:focus + .label-name::after, .form input:valid + .label-name::after{
+transform: translateX(0%);
+}

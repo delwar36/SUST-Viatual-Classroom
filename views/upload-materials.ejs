@@ -1,0 +1,155 @@
+<%- include('./partials/nav-sidebar') %>
+<section class="mb-2">
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col">
+                <div class="purple-square-container">
+                    <div class="purple-square" style="padding: 25px;border-radius: 10px">
+                        <form action="/classmaterialsupload/<%= task %>" method="POST" enctype="multipart/form-data">
+                            <div class="form-group nopadding">
+                                <label style="font-family: 'Ubuntu Mono';font-size: 20px;color: white"
+                                       for="textarea">Give
+                                    Description</label>
+                                <div class="page-wrapper box-content">
+                                    <textarea class="content" name="topic" id="textarea" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                    <label for="option" style="font-family: 'Ubuntu Mono';font-size: 20px"
+                                           class="text-light">Select your option</label>
+                                    <select name="select" class="selectpicker" id="option" onchange="optionSelect()">
+                                        <option value="0">Materials</option>
+                                        <option value="1">Assignment</option>
+                                    </select>
+                            </div>
+                            <div class="form-group uk-hidden" id="assignmentTopic">
+                                <div class="form-group">
+                                    <label for="assignmentTopic" style="font-family: 'Ubuntu Mono';font-size: 20px"
+                                           class="text-light">Give your topic</label>
+                                    <input class="form-control" style="width: 350px" id="assignmentTopic" name="assignmentTopic" placeholder="topic">
+                                </div>
+                            </div>
+                            <div class="form-group" id="hidden">
+                                <label for="file" style="font-family: 'Ubuntu Mono';font-size: 20px" class="text-light">Add
+                                    have any files(.jpg .png .gif .zip .pdf .doc .txt)(MAX-1mb)</label>
+                                <div class="row">
+                                    <div class="col-md-2" style="margin-top: 12px">
+                                        <div class="custom-file-input-style btn-group-lg">
+                                            <input type="file" name="class_files" multiple id="fileElementId">
+                                            <input type="button" value="Attach File" class="btn text-light"
+                                                   style="background:#8931d6;margin-top: 2px">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 ml-2">
+                                        <p id="text" class="text-light "
+                                           style="font-size: 18px;margin-top: 10px;font-family: 'Abyssinica SIL'">No
+                                            file selected</p>
+                                        <p style="width: 100%;height: 2px;background: #4a86ba;"
+                                           class=""></p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group uk-hidden" id="time">
+                                <label for="time1" style="font-family: 'Ubuntu Mono';font-size: 20px"
+                                       class="text-light">Give Due time</label>
+                                <input id="time1" name="duetime" data-format="hh:mm A" class="form-control sel-time-am"
+                                       style="width: 350px" placeholder="hh:mm"
+                                       type="text">
+                            </div>
+                            <div class="form-group uk-hidden" id="date">
+                                <label for="date" style="font-family: 'Ubuntu Mono';font-size: 20px" class="text-light">Give
+                                    due date</label>
+                                <input type="date" id="date" class="form-control" style="width: 350px" name="due">
+                            </div>
+                            <div class="row justify-content-center align-self-center mt-3">
+                                <div class="form-group btn-group-lg">
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-upload">Upload your materials/assignment</i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<a id="back2Top" title="Back to top" href="#">&#10148;</a>
+
+<script type="text/javascript" src="http://demo.itsolutionstuff.com/plugin/clockface.js"></script>
+
+<script type="text/javascript">
+    $('.sel-time').clockface({format: 'HH:mm'});
+    $('.sel-time-am').clockface();
+</script>
+<script>
+    $(document).ready(function () {
+        $('.content').richText();
+    });
+</script>
+
+<script>
+    $(window).scroll(function () {
+        let height = $(window).scrollTop();
+        if (height > 100) {
+            $('#back2Top').fadeIn();
+        } else {
+            $('#back2Top').fadeOut();
+        }
+    });
+    $(document).ready(function () {
+        $("#back2Top").click(function (event) {
+            event.preventDefault();
+            $("html, body").animate({scrollTop: 0}, "slow");
+            return false;
+        });
+
+    });
+</script>
+<script>
+    function optionSelect() {
+        let e = document.getElementById('option');
+        let value = e.options[e.selectedIndex].value;
+
+        let hide = document.getElementById('hidden');
+        let date = document.getElementById('date');
+        let time = document.getElementById('time');
+        let assignmentTopic = document.getElementById('assignmentTopic');
+        if (value === '1') {
+            hide.classList.add('uk-hidden');
+            date.classList.remove('uk-hidden');
+            time.classList.remove('uk-hidden');
+            assignmentTopic.classList.remove('uk-hidden');
+        } else {
+            hide.classList.remove('uk-hidden');
+            date.classList.add('uk-hidden');
+            time.classList.add('uk-hidden');
+            assignmentTopic.classList.add('uk-hidden');
+        }
+    }
+
+</script>
+<script>
+    $(document).ready(function () {
+        $('.custom-file-input-style input[type="file"]').change(function (e) {
+            let text = document.getElementById('text');
+            let len = e.target.files.length;
+            // text.innerHTML = len.toString();
+            let fileInput = document.getElementById('fileElementId');
+           let names = '';
+            for (let i = 0; i < len; ++i) {
+                if (i === len-1){
+                    names = names.concat(fileInput.files.item(i).name);
+                }else {
+                    names = names.concat(fileInput.files.item(i).name) + ' | ';
+                }
+
+            }
+            text.innerHTML = names;
+        });
+
+    });
+</script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+

@@ -1,0 +1,147 @@
+<%- include('./partials/nav-sidebar') %>
+<section>
+    <div>
+        <div class="row justify-content-center align-self-center">
+            <%- include('./partials/messages') %>
+        </div>
+    </div>
+
+    <div class="container-base" id="container">
+        <div class="form-container sign-up-container">
+            <form action="/user/sign-up" class="login-form" method="POST">
+                <p class="login-h1" style="font-family: 'Ubuntu Mono';font-size: 40px">Create Account</p>
+                <i class="material-icons" style="font-size: 50px !important;color: #2436cd">person_add</i>
+                <label for="option" style="font-family: 'Ubuntu Mono';font-size: 15px"
+                       class="text-light">Select registration type</label>
+
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="option">Options</label>
+                    </div>
+                    <select class="custom-select" name="select" id="option" onchange="optionSelect();">
+                        <option value="0">Student</option>
+                        <option value="1">Teacher</option>
+                    </select>
+                </div>
+                <div class="input-group mb-2">
+                    <input type="text" name="firstName" class="form-control" placeholder="First name" required>
+                    <input type="text" name="lastName" class="form-control" placeholder="Last name" required>
+                </div>
+                <div class="input-group mb-2" id="registration">
+                    <input type="text" class="form-control" placeholder="Registration number"
+                           name="registration"
+                           value="<%= typeof registration != 'undefined' ? registration : '' %>"/>
+                </div>
+
+                <div class="input-group mb-2">
+                    <input type="email" class="form-control" id="compose-to" placeholder="Email" name="email"
+                           value="<%= typeof email != 'undefined' ? email : '' %>" required/>
+                </div>
+                <div class="input-group mb-2">
+                    <input type="password" class="form-control" id="password" placeholder="Password" name="password"
+                           value="<%= typeof password != 'undefined' ? password : '' %>" required/>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-group mb-2">
+                    <input type="password" class="form-control" placeholder="Confirm Password" name="confirm_password"
+                           value="<%= typeof confirm_password != 'undefined' ? confirm_password : '' %>" required/>
+                </div>
+                <button class="login-button mt-3" type="submit">Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="/user/login" class="login-form" method="POST">
+                <h1 class="login-h1 mb-2">Sign in</h1>
+                <!--                <div class="social-container">-->
+                <!--                    <div class="g-signin2" data-onsuccess="onSignIn"></div>-->
+                <!--                </div>-->
+                <!--                <span class="login-span">or use your account</span>-->
+                <i class="material-icons" style="font-size: 60px !important;color: #2436cd">person_pin</i>
+                <div class="input-group mb-2 mt-2">
+                    <input type="email" class="form-control" placeholder="Email" name="email" required/>
+                </div>
+                <div class="input-group mb-2">
+                    <input type="password" id="passwordLogin" class="form-control" placeholder="Password" name="password" required/>
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">
+                            <span toggle="#passwordLogin" class="fa fa-fw fa-eye field-icon toggle-passwordLogin"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="/user/updateyourpassword" class="login-a" style="color: #e6e6e6;font-family: Ubuntu">Forgot/Update
+                    your password?</a>
+                <button class="login-button" type="submit">Sign In</button>
+            </form>
+
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p class="login-p" style="color: #e6e6e6;font-family: Ubuntu">To keep connected with us please login
+                        with your personal info</p>
+                    <button class="login-button" style="background-color: transparent;
+	               border-color: #FFFFFF;" onMouseOver="this.style.background='#32C552'"
+                            onMouseOut="this.style.background='#6B76BE'" id="signIn">Sign In
+                    </button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1 class="login-h1">Hello, Friend!</h1>
+                    <p class="login-p" style="color: white;font-family: Ubuntu">Enter your personal details and start
+                        journey with us</p>
+                    <button class="login-button" id="signUp" style="background-color: transparent;
+	               border-color: #FFFFFF;" onMouseOver="this.style.background='#32C552'"
+                            onMouseOut="this.style.background='#6B76BE'">Sign Up
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+    $(".toggle-password").click(function () {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        let input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+</script>
+
+<script type="text/javascript">
+    $(".toggle-passwordLogin").click(function () {
+        $(this).toggleClass("fa-eye fa-eye-slash");
+        let input = $($(this).attr("toggle"));
+        if (input.attr("type") == "password") {
+            input.attr("type", "text");
+        } else {
+            input.attr("type", "password");
+        }
+    });
+</script>
+
+<script>
+    function optionSelect() {
+        let e = document.getElementById('option');
+        let value = e.options[e.selectedIndex].value;
+
+        let registration = document.getElementById('registration');
+
+        let assignmentTopic = document.getElementById('assignmentTopic');
+        if (value === '1') {
+            registration.classList.add('uk-hidden');
+        } else {
+            registration.classList.remove('uk-hidden');
+        }
+    }
+</script>
+
+    

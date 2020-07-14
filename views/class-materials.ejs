@@ -1,0 +1,1207 @@
+<%- include('./partials/nav-sidebar') %>
+
+<section>
+    <div class="container">
+        <div class="row justify-content-center align-self-center m-4">
+            <ul class="nav nav-tabs nav-justified" style="font-family: Ubuntu">
+                <li class="nav-item">
+                    <% if (path_clone === 'showclass'){ %>
+                        <a class="nav-link active" href="/showclass/<%= result._id %>">Stream</a>
+                    <% } else if (path_clone === 'joined'){ %>
+                        <a class="nav-link active" href="/joined/<%= result._id %>">Stream</a>
+                    <% } %>
+                </li>
+                <li class="nav-item">
+                    <% if (path_clone === 'showclass'){ %>
+                        <a class="nav-link" href="/showclasswork/<%= result._id %>">Class Work</a>
+                    <% } else if (path_clone === 'joined'){ %>
+                        <a class="nav-link" href="/joinedclasswork/<%= result._id %>">Class Work</a>
+                    <% } %>
+                </li>
+                <li class="nav-item">
+                    <% if (path_clone === 'showclass'){ %>
+                        <a class="nav-link" href="/showclassmates/<%= result._id %>">Students</a>
+                    <% } else if (path_clone === 'joined'){ %>
+                        <a class="nav-link" href="/joinedclassmates/<%= result._id %>">Class Mates</a>
+                    <% } %>
+                </li>
+                <li class="nav-item">
+                    <% if (path_clone === 'showclass'){ %>
+                        <a class="nav-link" href="/showclassgrade/<%= result._id %>">Mark</a>
+                    <% } else if (path_clone === 'joined'){ %>
+                        <a class="nav-link" href="/joinedclassgrade/<%= result._id %>">Mark</a>
+                    <% } %>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="modal fade" id="compose-modal" tabindex="-1" role="dialog"
+             style="margin-left: 35%; border-radius: 10px;">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" style="background-color: #19688E">
+                    <div class="float-right">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/sendcode/<%= result.id %>" method="POST">
+                        <div class="modal-body" style="color: #aae2ff">
+                            <% if(path_clone === 'showclass'){ %>
+                                <div class="form-group">
+                                    <label for="compose-to" class="control-label"><small>Select registration that you
+                                            want to send code</small></label>
+                                    <select multiple class="selectpicker form-control" id="compose-to"
+                                            data-live-search="true" name="emails" title="Select registration"
+                                            data-hide-disabled="true"
+                                            data-actions-box="true"
+                                            data-virtual-scroll="true" required>
+                                        <% batchArray.forEach(batch => { %>
+                                            <optgroup label="<%= batch + " Batch" %>">
+                                                <% allUser.forEach(userInformation => { %>
+                                                    <% if (!userInformation.isClassCreator){ %>
+                                                        <% if (userInformation.registration){ %>
+                                                            <% let tempBatch = userInformation.registration.toString().substr(0, 4); %>
+                                                            <% if (batch.toString() === tempBatch){ %>
+                                                                <option value="<%= userInformation.email %>"><%= userInformation.registration %></option>
+                                                            <% } %>
+                                                        <% } %>
+                                                    <% } %>
+                                                <% }) %>
+                                            </optgroup>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                            <% } %>
+                            <div class="form-group">
+                                <label for="compose-message" class="control-label"><small>if have any
+                                        description,you can write?</small></label>
+                                <textarea class="form-control" id="compose-message" rows="4"
+                                          required name="messageBody"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="text-light"
+                                    style="background-color: rgb(242, 114, 2); border-radius: 20px; padding: 7px; border:1px solid rgb(242, 114, 2); width : 80px;"
+                                    onMouseOver="this.style.background='rgb(242,133,33)'"
+                                    onMouseOut="this.style.background='rgb(242, 114, 2)'"
+                                    data-dismiss="modal">Close
+                            </button>
+                            <button type="submit" class="text-light" id="send-button"
+                                    style="background-color:rgb(187,78,255); border-radius: 20px; padding: 7px; border:1px solid rgb(187,78,255); width : 80px;"
+                                    onMouseOver="this.style.background='#4855ff'"
+                                    onMouseOut="this.style.background='rgb(164,67,255)'">
+                                Send
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--Announce modal-->
+<section>
+    <div class="container">
+        <div class="modal fade" id="announce" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+             style="width: 100%">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content" style="background-color:#19688E">
+                    <div class="modal-header">
+                        <button type="button" class="close p-1" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="/announcements/<%= result._id %>" method="POST">
+                        <div class="modal-body">
+                            <textarea class="content" name="announce" id="textarea" required></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn  btn-danger"
+                                    data-dismiss="modal">Close
+                            </button>
+                            <button type="submit" class="btn btn-success">
+                                Send
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div style="width: 60%;margin-left: 5px">
+            <%- include('./partials/messages') %>
+        </div>
+    </div>
+</section>
+<section>
+    <div class="container mt-4">
+        <div class="">
+            <div class="text-light p-3 mt-2 mb-2"
+                 style="float:left;width: 28%; background-color: rgb(61,77,149); border-radius: 5px;">
+                <% if (path_clone === 'showclass') { %>
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-light uk-text-bold"
+                               style="font-size: 35px;font-family: 'Droid Sans Mono'"><%= result.classname %></p>
+                            <p style="margin-left: 2px">Class Code : <strong><%= result.class_code %></strong></p>
+                        </div>
+                    </div>
+                <% } %>
+                <% if (path_clone === 'showclass') { %>
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-light uk-text-bold"
+                               style="font-size: 15px;font-family: 'Ubuntu Mono'">If you want to upload materials or
+                                create new assignment then click add task button!</p>
+                            <a href="/uploadmaterials/<%= result._id %>"
+                               class="btn shadow"
+                               style="background-color: #3579ba;color:white;width: 100%;text-decoration: none;!important;font-family: 'Ubuntu Mono';font-size: 20px"
+                               onMouseOver="this.style.background='#668fbb';"
+                               onMouseOut="this.style.background='#3579ba'"><i
+                                        class="fa fa-plus-square mr-2" style="font-size: 23px"></i>Add new task</a>
+                        </div>
+                    </div>
+                <% } %>
+                <% if (path_clone === 'joined') { %>
+                    <div class="row">
+                        <div class="col">
+                            <p class="text-light uk-text-bold"
+                               style="font-size: 40px;font-family: 'Droid Sans Mono'"><%= result.classname %></p>
+                            <p class="ml-2">BATCH : <strong><%= result.batch %></strong></p>
+                        </div>
+
+                    </div>
+                <% } %>
+                <% if (path_clone === 'showclass') { %>
+                    <div style="margin-top: 13px">
+                        <p class="text-light uk-text-bold"
+                           style="font-size: 15px;font-family: 'Ubuntu Mono';">If you want to send code than follow
+                            below!</p>
+
+                        <div>
+                            <a href="#compose-modal" data-toggle="modal"
+                               class="btn shadow"
+                               style="background-color: #ba8b00;color:white;width: 100%;text-decoration: none;!important;font-family: 'Abyssinica SIL';font-size: 20px"
+                               onMouseOver="this.style.background='#b0c217';this.style.color='white'"
+                               onMouseOut="this.style.background='#ba8b00'">Send code to student</a>
+                        </div>
+                    </div>
+                <% } %>
+                <% if (path_clone === 'showclass') { %>
+                    <div class="row">
+                        <div class="col mt-2">
+                            <p class="text-light uk-text-bold"
+                               style="font-size: 15px;font-family: 'Ubuntu Mono'">If you have any announcements can send
+                                announce !</p>
+                            <a class="btn btn-success text-light shadow" data-toggle="modal"
+                               data-target="#announce"
+                               style="width: 100%;text-decoration: none;!important;font-family: 'Ubuntu Mono';font-size: 20px"><i
+                                        class="fa fa-microphone mr-2" style="font-size: 25px"></i>Announcements</a>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+
+        <div style="float: right; width: 72%" class="text-light">
+            <% if (path_clone === 'showclass') { %>
+                <% file.forEach(res => { %>
+                    <% let postID = res._id.toString(); %>
+                    <% if (res != null){ %>
+                        <% let select = res.select.toString(); %>
+                        <% if(select === '0' && res.isPinned === true) { %>
+                            <div class="text-light p-2 m-2"
+                                 style="background-color: rgb(37,80,112); border-radius: 5px;">
+                                <div class="row m-1">
+                                    <div class="col-10">
+                                        <div class="row">
+                                            <div class="thumbnail1">
+                                                <% if(user.profile_picture){ %>
+                                                    <img src="<%= `../public/uploads/${user.profile_picture}` %>"
+                                                         class="rounded-circle"
+                                                         alt="Image">
+                                                <% } else { %>
+                                                    <img src="../public/images/default_image.ico"
+                                                         alt="Default Profile Image"
+                                                         class="rounded-circle">
+                                                <% } %>
+
+                                            </div>
+                                            <div style="margin-left: 12px">
+                                                <p class="text-light mt-2 shadow-lg"><%= user.name %>
+                                                    <span><sup><strong><%= res.date %></strong></sup></span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <div style="float: right">
+                                            <div class="dropdown dropleft">
+                                                <i class="fa fa-map-pin"
+                                                   style="font-size: 20px;color: #caff09;margin-right: 5px"
+                                                   aria-hidden="true"></i>
+                                                <a aria-haspopup="true" id="dropdownMenuLink" data-toggle="dropdown"
+                                                   aria-expanded="false"
+                                                   style="background: transparent !important;margin-top: 10px;">
+                                                    <i class="fa fa-chevron-circle-down"
+                                                       style="font-size: 20px;color: white" aria-hidden="true"></i>
+                                                </a>
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                     style="background:#8ec7ce;">
+                                                    <a class="dropdown-item"
+                                                       href="/updateclassmaterials/<%= res._id %>"><i
+                                                                class="fa fa-pencil-square-o"
+                                                                aria-hidden="true"
+                                                                style="font-size: 20px;color: #3063ba;margin-right: 10px"></i>
+                                                        Update</a>
+                                                    <form name="myFrom" method="get"
+                                                          action="/deletematerials/<%= res._id %>/<%= result._id %>">
+                                                        <a class="dropdown-item" onclick="deletePinnedTask(event)"><i
+                                                                    class="fa fa-trash"
+                                                                    aria-hidden="true"
+                                                                    style="font-size: 20px;color: #3063ba;margin-right: 19px"></i>Delete</a>
+                                                    </form>
+                                                    <form name="myUnPinnedFrom" method="get"
+                                                          action="/unpinpostmaterials/<%= res._id %>/<%= result._id %>">
+                                                        <a class="dropdown-item" onclick="unpinnedTask(event)"><i
+                                                                    class="fa fa-map-pin"
+                                                                    aria-hidden="true"
+                                                                    style="font-size: 20px;color: #3063ba;margin-left: 3px;margin-right: 23px"></i>UnPin
+                                                            Post</a>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row m-1">
+                                    <!--                                    <p style="white-space: pre-wrap;color: white"></p>-->
+                                    <div class="mr-2 ml-2" style="margin-top: 10px">
+                                        <%- res.topic %>
+                                    </div>
+                                </div>
+                                <div class="row m-2">
+                                    <div class="col-md-6">
+                                        <% res.files.forEach(result => { %>
+                                            <% let type = result.mimetype %>
+                                            <% if(type === 'image/jpeg' || type === 'image/png' || type === 'image/gif') { %>
+                                                <div class="row mt-1 showhim"
+                                                     style="background:#265a7b; border-radius: 5px;"
+                                                     onMouseOver="this.style.background='#265f80'"
+                                                     onMouseOut="this.style.background='#265a7b'">
+                                                    <div class="col-md-10">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                    <img class="img-fluid float-left"
+                                                                         src="<%= `../public/uploads/${result.filename}` %>"
+                                                                         style="border-radius: 5px;object-fit: cover"
+                                                                         height="50"
+                                                                         width="60">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div style="display: inline">
+                                                                    <small class="text-light"
+                                                                           style="overflow-wrap: break-word"><strong><%= result.originalname %></strong></small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 showme">
+                                                        <div class="mt-1">
+                                                            <a href="<%= `../public/uploads/${result.filename}` %>"
+                                                               style="text-decoration: none;" download><i
+                                                                        class="fa fa-download text-light"
+                                                                        style="font-size: 20px"
+                                                                ></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <% } %>
+                                        <% }); %>
+                                    </div>
+                                    <div class="col-md-5 ml-2">
+                                        <% res.files.forEach(result => { %>
+                                            <% let type = result.mimetype %>
+                                            <% let name = result.originalname.split('.'); %>
+                                            <% if (type === 'text/plain' || type === 'application/pdf' || type === 'application/zip' || type === 'application/msword' || type === 'application/vnd.ms-powerpoint' || type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') { %>
+                                                <div class="row mt-1 p-1 showhim"
+                                                     style="background:#266687; border-radius: 5px;"
+                                                     onMouseOver="this.style.background='#29688c'"
+                                                     onMouseOut="this.style.background='#266687'">
+                                                    <% if (type === 'text/plain') { %>
+                                                        <div class="col-3">
+                                                            <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                <i class="fa fa-file-alt"
+                                                                   style="font-size: 40px;color: #b2c1d6;margin-top: 10%"
+                                                                   onMouseOver="this.style.color='#fff'"
+                                                                   onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                        </div>
+                                                    <% } %>
+                                                    <% if (type === 'application/pdf') { %>
+                                                        <div class="col-3">
+                                                            <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                <i class="fa fa-file-pdf-o"
+                                                                   style="font-size: 40px;color: #b2c1d6;margin-top: 10%"
+                                                                   onMouseOver="this.style.color='#fff'"
+                                                                   onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                        </div>
+                                                    <% } %>
+                                                    <% if (type === 'application/msword') { %>
+                                                        <div class="col-3">
+                                                            <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                <i class="fa fa-file-word"
+                                                                   style="font-size: 40px;color: #b2c1d6;margin-top: 10%"
+                                                                   onMouseOver="this.style.color='#fff'"
+                                                                   onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                        </div>
+                                                    <% } %>
+                                                    <% if (type === 'application/zip') { %>
+                                                        <div class="col-3">
+                                                            <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                <i class="fa fa-file-archive"
+                                                                   style="font-size: 40px;color: #b2c1d6;margin-top: 10%;"
+                                                                   onMouseOver="this.style.color='#fff'"
+                                                                   onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                        </div>
+                                                    <% } %>
+
+                                                    <% if (type === 'application/vnd.ms-powerpoint') { %>
+                                                        <div class="col-3">
+                                                            <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                <i class="fa fa-file-powerpoint"
+                                                                   style="font-size: 40px;color: #b2c1d6;margin-top: 12%;"
+                                                                   onMouseOver="this.style.color='#fff'"
+                                                                   onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                        </div>
+                                                    <% } %>
+                                                    <% if (type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') { %>
+                                                        <div class="col-3">
+                                                            <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                <i class="fa fa-file-powerpoint"
+                                                                   style="font-size: 40px;color: #b2c1d6;margin-top: 10%;"
+                                                                   onMouseOver="this.style.color='#fff'"
+                                                                   onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                        </div>
+                                                    <% } %>
+                                                    <div class="col-7">
+                                                        <strong style="font-size: 13px;overflow-wrap: break-word"><%= name[0] %></strong>
+                                                    </div>
+                                                    <div class="col-1 showme">
+                                                        <a href="<%= `../public/uploads/${result.filename}` %>"
+                                                           style="text-decoration: none;" download><i
+                                                                    class="fa fa-download text-light"
+                                                                    style="font-size: 20px;color: #d6d6d6"
+                                                            ></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            <% }else { %>
+                                                <!--                                                <h2 style="font-family: Ubuntu">You don't upload something..</h2>-->
+                                            <% } %>
+                                        <% }); %>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div>
+                                    <% let commentCount = 0; %>
+                                    <% taskComment.forEach(comment => { %>
+                                        <% let commentID = comment.comment_post.toString(); %>
+                                        <% if (commentID === postID){ %>
+                                            <% commentCount++; %>
+                                        <% } %>
+                                    <% }) %>
+                                    <p class="ml-1"><strong style="color: #679cba"><sup
+                                                    style="font-size: 15px"><%= commentCount %></sup></strong>
+                                        class comments
+                                    </p>
+                                    <% taskComment.forEach(comment => { %>
+                                        <% let commentID = comment.comment_post.toString(); %>
+                                        <% if (commentID === postID){ %>
+                                            <div class="row m-1">
+                                                <div class="thumbnail2">
+                                                    <img src="<%= `../public/uploads/${comment.comment_owner_profile_picture}` %>"
+                                                         class="rounded-circle"
+                                                         alt="Image">
+                                                </div>
+                                                <div style="margin-left: 12px">
+                                                    <p><strong style="color: #c4c0d2;"
+                                                               class="shadow-lg"
+                                                               id="username"><%= comment.comment_owner_name %></strong><span><sup><strong><%= comment.date %></strong></sup></span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="row ml-2">
+                                                <p style="white-space: pre-wrap;color: white"><%= comment.comment %></p>
+                                            </div>
+                                        <% } %>
+                                    <% }) %>
+                                </div>
+                                <hr>
+
+                                <form action="/postcomment/<%= path_clone %>/<%= res._id %>/<%= result._id %>"
+                                      method="POST" onsubmit="return validateForm()">
+                                    <div class="row">
+                                        <div class="input-group-sm ml-3 thumbnail2">
+                                            <img src="<%= `../public/uploads/${user.profile_picture}` %>"
+                                                 class="rounded-circle"
+                                                 alt="Image">
+                                        </div>
+
+                                        <div class="col-md-6 input-group-sm">
+                                        <textarea id="comment" style="height: 32px;" class="form-control" name="comment"
+                                                  placeholder="Add your comment" required></textarea>
+                                        </div>
+                                        <div class="col-md-4 btn-group-sm mr-2">
+                                            <button id="commentSubmit" type="submit"
+                                                    class="btn btn-primary"><i class="material-icons text-light"
+                                                                               style="font-size: 16px !important;color: #2436cd">comment</i>Comment
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        <% } %>
+                    <% } %>
+                <% }) %>
+                <% file.forEach(res => { %>
+                    <% let postID = res._id.toString(); %>
+                    <% if (res != null){ %>
+                        <% let select = res.select.toString(); %>
+                        <% if (res.isPinned === false) { %>
+                            <div class="text-light p-2 m-2"
+                                 style="background-color: rgb(37,80,112); border-radius: 5px;">
+                                <% if(select === '0') { %>
+                                    <div class="row m-1">
+                                        <div class="col-10">
+                                            <div class="row">
+                                                <div class="thumbnail1">
+                                                    <% if(user.profile_picture){ %>
+                                                        <img src="<%= `../public/uploads/${user.profile_picture}` %>"
+                                                             class="rounded-circle"
+                                                             alt="Image">
+                                                    <% } else { %>
+                                                        <img src="../public/images/default_image.ico"
+                                                             alt="Default Profile Image"
+                                                             class="rounded-circle">
+                                                    <% } %>
+                                                </div>
+                                                <div style="margin-left: 12px">
+                                                    <p class="text-light mt-2 shadow-lg"><%= user.name %>
+                                                        <span><sup><strong><%= res.date %></strong></sup></span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <div style="float: right">
+                                                <div class="dropdown dropleft">
+                                                    <a aria-haspopup="true" id="dropdownMenuLink" data-toggle="dropdown"
+                                                       aria-expanded="false"
+                                                       style="background: transparent !important;margin-top: 10px;">
+                                                        <i class="fa fa-chevron-circle-down"
+                                                           style="font-size: 20px;color: white" aria-hidden="true"></i>
+                                                    </a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                         style="background:#8ec7ce;">
+                                                        <a class="dropdown-item"
+                                                           href="/updateclassmaterials/<%= res._id %>"><i
+                                                                    class="fa fa-pencil-square-o"
+                                                                    aria-hidden="true"
+                                                                    style="font-size: 20px;color: #3063ba;margin-right: 10px"></i>
+                                                            Update</a>
+                                                        <form name="myFrom" method="get"
+                                                              action="/deletematerials/<%= res._id %>/<%= result._id %>">
+                                                            <a class="dropdown-item" onclick="deleteTask(event)"><i
+                                                                        class="fa fa-trash"
+                                                                        aria-hidden="true"
+                                                                        style="font-size: 20px;color: #3063ba;margin-right: 19px"></i>Delete</a>
+                                                        </form>
+                                                        <form name="myPinnedFrom" method="get"
+                                                              action="/pinpostmaterials/<%= res._id %>/<%= result._id %>">
+                                                            <a class="dropdown-item" onclick="pinnedTask(event)"><i
+                                                                        class="fa fa-map-pin"
+                                                                        aria-hidden="true"
+                                                                        style="font-size: 20px;color: #3063ba;margin-left: 3px;margin-right: 23px"></i>Pin
+                                                                Post</a>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row m-1">
+                                        <!--                                    <p style="white-space: pre-wrap;color: white"></p>-->
+                                        <div class="mr-2 ml-2" style="margin-top: 10px">
+                                            <%- res.topic %>
+                                        </div>
+                                    </div>
+                                    <div class="row m-2">
+                                        <div class="col-md-6">
+                                            <% res.files.forEach(result => { %>
+                                                <% let type = result.mimetype %>
+                                                <% if(type === 'image/jpeg' || type === 'image/png' || type === 'image/gif') { %>
+                                                    <div class="row mt-1 showhim"
+                                                         style="background:#265a7b; border-radius: 5px;"
+                                                         onMouseOver="this.style.background='#265f80'"
+                                                         onMouseOut="this.style.background='#265a7b'">
+                                                        <div class="col-md-10">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                        <img class="img-fluid float-left"
+                                                                             src="<%= `../public/uploads/${result.filename}` %>"
+                                                                             style="border-radius: 5px;object-fit: cover"
+                                                                             height="50"
+                                                                             width="60">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <div style="display: inline">
+                                                                        <small class="text-light"
+                                                                               style="overflow-wrap: break-word"><strong><%= result.originalname %></strong></small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-2 showme">
+                                                            <div class="mt-1">
+                                                                <a href="<%= `../public/uploads/${result.filename}` %>"
+                                                                   style="text-decoration: none;" download><i
+                                                                            class="fa fa-download text-light"
+                                                                            style="font-size: 20px"
+                                                                    ></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                <% } %>
+                                            <% }); %>
+                                        </div>
+                                        <div class="col-md-5 ml-2">
+                                            <% res.files.forEach(result => { %>
+                                                <% let type = result.mimetype %>
+                                                <% let name = result.originalname.split('.'); %>
+                                                <% if (type === 'text/plain' || type === 'application/pdf' || type === 'application/zip' || type === 'application/msword' || type === 'application/vnd.ms-powerpoint' || type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') { %>
+                                                    <div class="row mt-1 p-1 showhim"
+                                                         style="background:#266687; border-radius: 5px;"
+                                                         onMouseOver="this.style.background='#29688c'"
+                                                         onMouseOut="this.style.background='#266687'">
+                                                        <% if (type === 'text/plain') { %>
+                                                            <div class="col-3">
+                                                                <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                    <i class="fa fa-file-alt"
+                                                                       style="font-size: 40px;color: #b2c1d6;margin-top: 10%"
+                                                                       onMouseOver="this.style.color='#fff'"
+                                                                       onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                            </div>
+                                                        <% } %>
+                                                        <% if (type === 'application/pdf') { %>
+                                                            <div class="col-3">
+                                                                <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                    <i class="fa fa-file-pdf-o"
+                                                                       style="font-size: 40px;color: #b2c1d6;margin-top: 10%"
+                                                                       onMouseOver="this.style.color='#fff'"
+                                                                       onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                            </div>
+                                                        <% } %>
+                                                        <% if (type === 'application/msword') { %>
+                                                            <div class="col-3">
+                                                                <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                    <i class="fa fa-file-word"
+                                                                       style="font-size: 40px;color: #b2c1d6;margin-top: 10%"
+                                                                       onMouseOver="this.style.color='#fff'"
+                                                                       onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                            </div>
+                                                        <% } %>
+                                                        <% if (type === 'application/zip') { %>
+                                                            <div class="col-3">
+                                                                <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                    <i class="fa fa-file-archive"
+                                                                       style="font-size: 40px;color: #b2c1d6;margin-top: 10%;"
+                                                                       onMouseOver="this.style.color='#fff'"
+                                                                       onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                            </div>
+                                                        <% } %>
+
+                                                        <% if (type === 'application/vnd.ms-powerpoint') { %>
+                                                            <div class="col-3">
+                                                                <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                    <i class="fa fa-file-powerpoint"
+                                                                       style="font-size: 40px;color: #b2c1d6;margin-top: 12%;"
+                                                                       onMouseOver="this.style.color='#fff'"
+                                                                       onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                            </div>
+                                                        <% } %>
+                                                        <% if (type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') { %>
+                                                            <div class="col-3">
+                                                                <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                    <i class="fa fa-file-powerpoint"
+                                                                       style="font-size: 40px;color: #b2c1d6;margin-top: 10%;"
+                                                                       onMouseOver="this.style.color='#fff'"
+                                                                       onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                            </div>
+                                                        <% } %>
+                                                        <div class="col-7">
+                                                            <strong style="font-size: 13px;overflow-wrap: break-word"><%= name[0] %></strong>
+                                                        </div>
+                                                        <div class="col-1 showme">
+                                                            <a href="<%= `../public/uploads/${result.filename}` %>"
+                                                               style="text-decoration: none;" download><i
+                                                                        class="fa fa-download text-light"
+                                                                        style="font-size: 20px;color: #d6d6d6"
+                                                                ></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                <% }else { %>
+
+                                                <% } %>
+                                            <% }); %>
+                                        </div>
+                                    </div>
+
+                                <% } else if (select === '1'){ %>
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <% let classID = result._id %>
+                                            <% let postID = res._id %>
+                                            <% let link = classID.toString() + postID.toString() %>
+                                            <a style="text-decoration: none"
+                                               href="/indvidualassignmentmark/<%= link %>">
+                                                <div class="col-10">
+                                                    <div class="row">
+                                                        <div>
+                                                            <img src="../public/images/assignment.png" height="40px"
+                                                                 width="40px">
+                                                        </div>
+                                                        <div>
+                                                            <p class="text-light mt-1 shadow-lg" style="color: white">
+                                                                <strong
+                                                                        style="color: #c4c0d2"><%= user.name %></strong>
+                                                                posted new <span><strong
+                                                                            style="color: #ba8b00">ASSIGNMENT </strong><strong
+                                                                            class="text-light"><sup><%= res.date %></sup></strong></span>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <div style="float: right">
+                                                <div class="dropdown dropleft" style="margin-left: 270px">
+                                                    <a aria-haspopup="true" id="dropdownMenuLink" data-toggle="dropdown"
+                                                       aria-expanded="false"
+                                                       style="background: transparent !important;">
+                                                        <i class="material-icons grow p-1"
+                                                           aria-hidden="true">more_vert</i>
+                                                    </a>
+                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"
+                                                         style="background:#8ec7ce;">
+                                                        <form name="myFrom" method="get"
+                                                              action="/deletematerials/<%= res._id %>/<%= result._id %>">
+                                                            <a
+                                                                    class="dropdown-item" onclick="deleteTask(event)"
+                                                                    href=""><i
+                                                                        class="fa fa-trash mr-4"
+                                                                        aria-hidden="true"
+                                                                        style="font-size: 20px;color: #3063ba"></i>Delete</a>
+                                                        </form>
+                                                        <a class="dropdown-item"
+                                                           href="/updateclassassignment/<%= res._id %>"><i
+                                                                    class="fa fa-pencil-square-o mr-3"
+                                                                    aria-hidden="true"
+                                                                    style="font-size: 20px;color: #3063ba"></i>
+                                                            Update</a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row m-1">
+                                        <div class="float-left">
+                                            <div class="ml-2" style="margin-top: 10px">
+                                                <%- res.assignmentTopic %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% } %>
+                                <hr>
+                                <div>
+                                    <% let commentCount = 0; %>
+                                    <% taskComment.forEach(comment => { %>
+                                        <% let commentID = comment.comment_post.toString(); %>
+                                        <% if (commentID === postID){ %>
+                                            <% commentCount++; %>
+                                        <% } %>
+                                    <% }) %>
+                                    <p class="ml-1"><strong style="color: #679cba"><sup
+                                                    style="font-size: 15px"><%= commentCount %></sup></strong>
+                                        class comments
+                                    </p>
+                                    <% taskComment.forEach(comment => { %>
+                                        <% let commentID = comment.comment_post.toString(); %>
+
+                                        <% if (commentID === postID){ %>
+                                            <div class="row m-1">
+                                                <div class="thumbnail2">
+                                                    <img src="<%= `../public/uploads/${comment.comment_owner_profile_picture}` %>"
+                                                         class="rounded-circle"
+                                                         alt="Image">
+                                                </div>
+                                                <div style="margin-left: 12px">
+                                                    <p><strong style="color: #c4c0d2;"
+                                                               class="shadow-lg"
+                                                               id="username"><%= comment.comment_owner_name %></strong><span><sup><strong><%= comment.date %></strong></sup></span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="row ml-2">
+                                                <p style="white-space: pre-wrap;color: white"><%= comment.comment %></p>
+                                            </div>
+                                        <% } %>
+
+                                    <% }) %>
+                                </div>
+                                <hr>
+
+                                <form action="/postcomment/<%= path_clone %>/<%= res._id %>/<%= result._id %>"
+                                      method="POST" onsubmit="return validateForm()">
+                                    <div class="row">
+                                        <div class="input-group-sm ml-3 thumbnail2">
+                                            <img src="<%= `../public/uploads/${user.profile_picture}` %>"
+                                                 class="rounded-circle"
+                                                 alt="Image">
+                                        </div>
+
+                                        <div class="col-md-6 input-group-sm">
+                                        <textarea id="comment" style="height: 32px;" class="form-control" name="comment"
+                                                  placeholder="Add your comment" required></textarea>
+                                        </div>
+                                        <div class="col-md-4 btn-group-sm mr-2">
+                                            <button id="commentSubmit" type="submit"
+                                                    class="btn btn-primary"><i class="material-icons text-light"
+                                                                               style="font-size: 16px !important;color: #2436cd">comment</i>Comment
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        <% } %>
+                    <% } %>
+                <% }) %>
+            <% } %>
+        </div>
+        <% if (path_clone === 'joined') { %>
+            <div style="float: left; width: 72%;" class="text-light">
+                <% file.forEach(res => { %>
+                    <% let postID = res._id.toString(); %>
+                    <% if (res != null){ %>
+                        <% let select = res.select.toString(); %>
+                        <div class="text-light p-2 m-2"
+                             style="background-color: rgb(37,80,112); border-radius: 5px;">
+                            <% if(select === '0') { %>
+                                <div class="row m-1">
+                                    <div class="thumbnail1">
+                                        <% if(join.owner_profile_picture){ %>
+                                            <img src="<%= `../public/uploads/${join.owner_profile_picture}` %>"
+                                                 class="rounded-circle"
+                                                 alt="Image">
+                                        <% } else { %>
+                                            <img src="../public/images/default_image.ico"
+                                                 alt="Default Profile Image"
+                                                 class="rounded-circle">
+                                        <% } %>
+                                    </div>
+                                    <div style="margin-left: 12px">
+                                        <p class="text-light shadow-lg mt-2"><%= join.owner_name %>
+                                            <span><sup><strong><%= res.date %></strong></sup></span></p>
+                                    </div>
+                                </div>
+                                <div class="row m-1">
+                                    <div class="mr-2 ml-2" style="margin-top: 10px">
+                                        <%- res.topic %>
+                                    </div>
+                                </div>
+                                <div class="row m-1">
+                                    <div class="col-md-6">
+                                        <% res.files.forEach(result => { %>
+                                            <% let type = result.mimetype %>
+                                            <% if(type === 'image/jpeg' || type === 'image/png' || type === 'image/gif') { %>
+                                                <div class="row mt-1 showhim"
+                                                     style="background:#265a7b; border-radius: 5px;"
+                                                     onMouseOver="this.style.background='#265f80'"
+                                                     onMouseOut="this.style.background='#265a7b'">
+                                                    <div class="col-md-10">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                                <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                    <img class="img-fluid float-left"
+                                                                         src="<%= `../public/uploads/${result.filename}` %>"
+                                                                         style="border-radius: 5px;object-fit: cover"
+                                                                         height="50"
+                                                                         width="60">
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-8">
+                                                                <div style="">
+                                                                    <small class="text-light"
+                                                                           style="overflow-wrap: break-word"><strong><%= result.originalname %></strong></small>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2 showme">
+                                                        <div style="margin-top: 30%">
+                                                            <a href="<%= `../public/uploads/${result.filename}` %>"
+                                                               style="text-decoration: none;" download><i
+                                                                        class="fa fa-download text-light"
+                                                                        style="font-size: 20px"
+                                                                ></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            <% } %>
+                                        <% }); %>
+                                    </div>
+                                    <div class="col-md-5 ml-2">
+                                        <% res.files.forEach(result => { %>
+                                            <% let type = result.mimetype %>
+                                            <% let name = result.originalname.split('.'); %>
+                                            <% if (type === 'text/plain' || type === 'application/pdf' || type === 'application/zip' || type === 'application/msword' || type === 'application/vnd.ms-powerpoint' || type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') { %>
+                                                <div class="row mt-1 p-1 showhim"
+                                                     style="background:#266687; border-radius: 5px;"
+                                                     onMouseOver="this.style.background='#29688c'"
+                                                     onMouseOut="this.style.background='#266687'">
+                                                    <% if (type === 'text/plain') { %>
+                                                        <div class="col-3">
+                                                            <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                <i class="fa fa-file-alt"
+                                                                   style="font-size: 40px;color: #b2c1d6;margin-top: 12%"
+                                                                   onMouseOver="this.style.color='#fff'"
+                                                                   onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                        </div>
+                                                    <% } %>
+                                                    <% if (type === 'application/pdf') { %>
+                                                        <div class="col-3">
+                                                            <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                <i class="fa fa-file-pdf-o"
+                                                                   style="font-size: 40px;color: #b2c1d6;margin-top: 12%"
+                                                                   onMouseOver="this.style.color='#fff'"
+                                                                   onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                        </div>
+                                                    <% } %>
+                                                    <% if (type === 'application/msword') { %>
+                                                        <div class="col-3">
+                                                            <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                <i class="fa fa-file-word"
+                                                                   style="font-size: 40px;color: #b2c1d6;margin-top: 12%"
+                                                                   onMouseOver="this.style.color='#fff'"
+                                                                   onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                        </div>
+                                                    <% } %>
+                                                    <% if (type === 'application/zip') { %>
+                                                        <div class="col-3">
+                                                            <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                <i class="fa fa-file-archive"
+                                                                   style="font-size: 40px;color: #b2c1d6;margin-top: 12%;"
+                                                                   onMouseOver="this.style.color='#fff'"
+                                                                   onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                        </div>
+                                                    <% } %>
+                                                    <% if (type === 'application/vnd.ms-powerpoint') { %>
+                                                        <div class="col-3">
+                                                            <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                <i class="fa fa-file-powerpoint"
+                                                                   style="font-size: 40px;color: #b2c1d6;margin-top: 12%;"
+                                                                   onMouseOver="this.style.color='#fff'"
+                                                                   onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                        </div>
+                                                    <% } %>
+                                                    <% if (type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') { %>
+                                                        <div class="col-3">
+                                                            <a href="<%= `../public/uploads/${result.filename}` %>">
+                                                                <i class="fa fa-file-powerpoint"
+                                                                   style="font-size: 40px;color: #b2c1d6;margin-top: 10%;"
+                                                                   onMouseOver="this.style.color='#fff'"
+                                                                   onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                                                        </div>
+                                                    <% } %>
+                                                    <div class="col-7">
+                                                        <strong style="font-size: 13px;overflow-wrap: break-word"><%= name[0] %></strong>
+                                                    </div>
+                                                    <div class="col-1 showme">
+                                                        <a href="<%= `../public/uploads/${result.filename}` %>"
+                                                           style="text-decoration: none;" download><i
+                                                                    class="fa fa-download text-light"
+                                                                    style="font-size: 20px;color: #d6d6d6"
+                                                            ></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            <% } %>
+                                        <% }); %>
+                                    </div>
+                                </div>
+                            <% } else{ %>
+                                <div class="m-3">
+                                    <a style="text-decoration: none" href="/submit/<%= res._id %><%= result._id %>">
+                                        <div class="row">
+                                            <div>
+                                                <img src="../public/images/assignment.png" height="40px"
+                                                     width="40px">
+                                            </div>
+                                            <div>
+                                                <p class="text-light shadow-lg"><strong
+                                                            style="color: #c4c0d2;"><%= join.owner_name %></strong>
+                                                    posted new <span><strong
+                                                                style="color: #ba8b00">ASSIGNMENT</strong></span>
+                                                    <sup><small><strong
+                                                                    class="text-light"><%= res.date %></strong></small></sup>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="row">
+                                        <div class="mr-2 ml-2 no-print" id="topic" style="margin-top: 10px">
+                                            <%- res.assignmentTopic %>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            <% } %>
+                            <hr>
+                            <div>
+                                <% let commentCount = 0; %>
+                                <% taskComment.forEach(comment => { %>
+                                    <% let commentID = comment.comment_post.toString(); %>
+                                    <% if (commentID === postID){ %>
+                                        <% commentCount++; %>
+                                    <% } %>
+                                <% }) %>
+                                <p class="ml-1"><strong style="color: #679cba"><sup
+                                                style="font-size: 15px"><%= commentCount %></sup></strong>
+                                    class comments
+                                </p>
+                                <% taskComment.forEach(comment => { %>
+                                    <% let commentID = comment.comment_post.toString(); %>
+
+                                    <% if (commentID === postID){ %>
+                                        <div class="row m-1">
+                                            <div class="thumbnail2">
+                                                <img src="<%= `../public/uploads/${comment.comment_owner_profile_picture}` %>"
+                                                     class="rounded-circle"
+                                                     height="35" width="35" alt="Image">
+                                            </div>
+                                            <div style="margin-left: 12px">
+                                                <p><strong style="color: #c4c0d2;"
+                                                           class="shadow-lg"
+                                                           id="username"><%= comment.comment_owner_name %></strong><span><sup><strong><%= comment.date %></strong></sup></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="row ml-5">
+                                            <p style="white-space: pre-wrap;color: white"><%= comment.comment %></p>
+                                        </div>
+                                    <% } %>
+
+                                <% }) %>
+                            </div>
+                            <hr>
+                            <form action="/postcomment/<%= path_clone %>/<%= res._id %>/<%= result._id %>" method="POST"
+                                  onsubmit="return validateForm()">
+                                <div class="row mt-1">
+                                    <div class="input-group-sm ml-3 thumbnail2">
+                                        <img src="<%= `../public/uploads/${user.profile_picture}` %>"
+                                             class="rounded-circle"
+                                             height="42" width="42" alt="Image">
+                                    </div>
+                                    <div class="col-md-6 input-group-sm">
+                                        <textarea id="comment" style="height: 31px;" class="form-control" name="comment"
+                                                  placeholder="Add your comment" required></textarea>
+                                    </div>
+                                    <div class="col-md-4 btn-group-sm">
+                                        <button type="submit" id="commentSubmit" class="btn btn-success"><i
+                                                    class="material-icons text-light"
+                                                    style="font-size: 16px !important;color: #2436cd">comment</i>Comment
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    <% } %>
+                <% }) %>
+            </div>
+        <% } %>
+    </div>
+</section>
+
+<a id="back2Top" title="Back to top" href="#">&#10148;</a>
+
+<script>
+
+    function pinnedTask(event) {
+        event.preventDefault(); // prevent form submit
+        let form = document.forms["myPinnedFrom"]; // storing the form
+        swal({
+            title: "Are you want to pinned the post?",
+        })
+            .then((willPinned) => {
+                if (willPinned) {
+                    form.submit();
+                } else {
+                }
+            });
+        $(".swal-button").css('background-color', '#5bff20');
+        $(".swal-title").css('color', 'white');
+        $(".swal-modal").css('background-color', '#3f69ac');
+    }
+
+
+    function unpinnedTask(event) {
+        event.preventDefault(); // prevent form submit
+        let form = document.forms["myUnPinnedFrom"]; // storing the form
+        swal({
+            title: "Are you want to Un pinned the post?",
+        })
+            .then((willPinned) => {
+                if (willPinned) {
+                    form.submit();
+                } else {
+                }
+            });
+        $(".swal-button").css('background-color', '#5bff20');
+        $(".swal-title").css('color', 'white');
+        $(".swal-modal").css('background-color', '#3f69ac');
+    }
+
+    function deleteTask(event) {
+        event.preventDefault(); // prevent form submit
+        let form = document.forms["myFrom"]; // storing the form
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover your file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                } else {
+                    swal({
+                        text: "Your files are safe!"
+                    });
+                    $(".swal-text").css('color', '#fff');
+                    $(".swal-button").css('background-color', '#5bff20');
+                }
+            });
+        $(".swal-text").css('color', '#fff');
+        $(".swal-title").css('color', 'yellow');
+        $(".swal-modal").css('background-color', '#3f69ac');
+    }
+
+    function deletePinnedTask(event) {
+        event.preventDefault(); // prevent form submit
+        let form = document.forms["myFrom"]; // storing the form
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover your file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    form.submit();
+                } else {
+                    swal({
+                        text: "Your files are safe!"
+                    });
+                    $(".swal-text").css('color', '#fff');
+                    $(".swal-button").css('background-color', '#5bff20');
+                }
+            });
+        $(".swal-text").css('color', '#fff');
+        $(".swal-title").css('color', 'yellow');
+        $(".swal-modal").css('background-color', '#3f69ac');
+    }
+
+    //
+    let userName = '';
+    $(document).ready(function () {
+        userName = document.getElementById('username').innerHTML;
+    });
+
+
+    // function validateForm() {
+    //     let comment = document.getElementById('comment').value;
+    //     if (comment === "") {
+    //         swal({
+    //             icon: "warning",
+    //             text: userName + " : You did not write any comment!",
+    //             value: true,
+    //             visible: true,
+    //             className: "",
+    //             closeModal: true,
+    //             button: {
+    //                 text: "OK",
+    //             },
+    //         });
+    //         $(".swal-button").css('background-color', 'red');
+    //         $(".swal-button").css('border', '3px solid red');
+    //         $(".swal-text").css('color', '#fff')
+    //         $(".swal-modal").css('background-color', '#3f69ac');
+    //         //$(".swal-overlay").css('background-color', 'rgba(43, 165, 137, 0.45)');
+    //         $(".swal-container.in").css('background-color', 'rgba(152,186,16,0.45)');
+    //         return false;
+    //     }
+    // }
+
+
+    /*Scroll to top when arrow up clicked BEGIN*/
+    $(window).scroll(function () {
+        let height = $(window).scrollTop();
+        if (height > 100) {
+            $('#back2Top').fadeIn();
+        } else {
+            $('#back2Top').fadeOut();
+        }
+    });
+    $(document).ready(function () {
+        $("#back2Top").click(function (event) {
+            event.preventDefault();
+            $("html, body").animate({scrollTop: 0}, "slow");
+            return false;
+        });
+
+    });
+    /*Scroll to top when arrow up clicked END*/
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('.content').richText();
+    });
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+
+
+
