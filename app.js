@@ -96,6 +96,6 @@ app.use(task);
 app.use('/user', user);
 
 
-const PORT = process.env.PORT || 8888;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, console.log(`Server is started on PORT ${PORT}`));
