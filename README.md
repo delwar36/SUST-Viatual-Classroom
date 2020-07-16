@@ -1,1 +1,2 @@
-# google_classroom_clone_web_app
+# SUST Virtual Classroom
+## An online learning platform
