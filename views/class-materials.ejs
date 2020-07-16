@@ -42,14 +42,14 @@
         <div class="modal fade" id="compose-modal" tabindex="-1" role="dialog"
              style="margin-left: 35%; border-radius: 10px;">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content" style="background-color: whitesmoke">
+                <div class="modal-content" style="background-color: rgb(255, 252, 252)">
                     <div class="float-right">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <form action="/sendcode/<%= result.id %>" method="POST">
-                        <div class="modal-body" style="color: #aae2ff">
+                        <div class="modal-body" style="color: #050708">
                             <% if(path_clone === 'showclass'){ %>
                                 <div class="form-group">
                                     <label for="compose-to" class="control-label"><small>Select registration that you
@@ -435,14 +435,14 @@
                                                          alt="Image">
                                                 </div>
                                                 <div style="margin-left: 12px">
-                                                    <p><strong style="color: #c4c0d2;"
+                                                    <p><strong style="color: #0d0d0e;"
                                                                class="shadow-lg"
                                                                id="username"><%= comment.comment_owner_name %></strong><span><sup><strong><%= comment.date %></strong></sup></span>
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="row ml-2">
-                                                <p style="white-space: pre-wrap;color: white"><%= comment.comment %></p>
+                                                <p style="white-space: pre-wrap;color: rgb(0, 0, 0)"><%= comment.comment %></p>
                                             </div>
                                         <% } %>
                                     <% }) %>
@@ -764,14 +764,14 @@
                                                          alt="Image">
                                                 </div>
                                                 <div style="margin-left: 12px">
-                                                    <p><strong style="color: #c4c0d2;"
+                                                    <p><strong style="color: #313033;"
                                                                class="shadow-lg"
                                                                id="username"><%= comment.comment_owner_name %></strong><span><sup><strong><%= comment.date %></strong></sup></span>
                                                     </p>
                                                 </div>
                                             </div>
                                             <div class="row ml-2">
-                                                <p style="white-space: pre-wrap;color: white"><%= comment.comment %></p>
+                                                <p style="white-space: pre-wrap;color: rgb(0, 0, 0)"><%= comment.comment %></p>
                                             </div>
                                         <% } %>
 
@@ -814,7 +814,7 @@
                     <% if (res != null){ %>
                         <% let select = res.select.toString(); %>
                         <div class="p-2 m-2"
-                             style="background-color: rgb(22, 22, 58); border-radius: 5px;">
+                             style="background-color: #eee7e7b7; border-radius: 5px;">
                             <% if(select === '0') { %>
                                 <div class="row m-1">
                                     <div class="thumbnail1">
@@ -995,7 +995,7 @@
                                         <% commentCount++; %>
                                     <% } %>
                                 <% }) %>
-                                <p class="ml-1"><strong style="color: #679cba"><sup
+                                <p class="ml-1"><strong style="color: #18191a"><sup
                                                 style="font-size: 15px"><%= commentCount %></sup></strong>
                                     class comments
                                 </p>
@@ -1010,14 +1010,14 @@
                                                      height="35" width="35" alt="Image">
                                             </div>
                                             <div style="margin-left: 12px">
-                                                <p><strong style="color: #c4c0d2;"
+                                                <p><strong style="color: #000000;"
                                                            class="shadow-lg"
                                                            id="username"><%= comment.comment_owner_name %></strong><span><sup><strong><%= comment.date %></strong></sup></span>
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="row ml-5">
-                                            <p style="white-space: pre-wrap;color: white"><%= comment.comment %></p>
+                                            <p style="white-space: pre-wrap;color: rgb(65, 57, 57)"><%= comment.comment %></p>
                                         </div>
                                     <% } %>
 
