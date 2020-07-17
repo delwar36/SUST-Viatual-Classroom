@@ -15,7 +15,7 @@ nav.fixed-top {
   padding: 0.5rem;
 }
 nav.bg-primary li a {
-  color: #fff !important;
+  /* color: #fff !important; */
 }
 nav li a.active {
   padding: .2rem .4rem;

@@ -34,7 +34,7 @@
 .login-button {
 	width: 200px;
 	border-radius: 25px;
-	border: 1px solid rgb(131, 130, 201);
+	border: none;
 	background-color: rgb(154, 153, 202);
 	color: #FFFFFF;
     font-size: 12px;
@@ -47,7 +47,7 @@
 }
 
 .login-button:hover{
-    background-color: rgb(136, 137, 189);;
+    color: white;
     transition: all 0.6s ease-in-out;
 }
 

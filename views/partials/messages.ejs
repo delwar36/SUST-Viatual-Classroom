@@ -1,6 +1,6 @@
 <% if(typeof errors != 'undefined') { %>
 <% errors.forEach(function(error){ %>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
+<div class="alert alert-warning alert-dismissible fade show" id='messageId' role="alert">
     <p><%= error.message %></p>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -10,7 +10,7 @@
 <% } %>
 
 <% if(success_message != '') { %>
-<div class="alert alert-success alert-dismissible fade show"  role="alert">
+<div class="alert alert-success alert-dismissible fade show" id='messageId' role="alert">
     <p><%= success_message %></p>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -19,7 +19,7 @@
 <% } %>
 
 <% if(error_message != ''){ %>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
+<div class="alert alert-warning alert-dismissible fade show" id='messageId' role="alert">
     <p><%= error_message %></p>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
@@ -28,10 +28,17 @@
 <% } %>
 
 <% if(error != ''){ %>
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
+<div class="alert alert-warning alert-dismissible fade show" id='messageId' role="alert">
     <p><%= error %></p>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>
 <% } %>
+
+<script>
+    let messageId = document.getElementById('messageId');
+    setTimeout(()=>{
+        messageId.classList.add('uk-hidden')
+    },2000)
+</script>
