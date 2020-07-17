@@ -2,9 +2,9 @@
 
 <section>
     <div class="container mt-3 align-content-center">
-        <div class="row text-light">
+        <div class="row ">
             <div class="col-md-8">
-                <p class="text-light uk-text-bold" style="font-size: 25px">Last Date : <strong
+                <p class=" uk-text-bold" style="font-size: 25px">Last Date : <strong
                             style="color: #7abaff;font-family: Ubuntu"><%= result.Due %></strong></p>
             </div>
         </div>
@@ -20,13 +20,13 @@
 <section>
     <div class="container align-content-center">
         <div class="row">
-            <div style="float: left; width: 60%;" class="text-light mt-2 mr-1">
-                <div class="text-light p-2" style="background-color: rgb(73,62,84); border-radius: 5px;">
+            <div style="float: left; width: 60%;" class=" mt-2 mr-1">
+                <div class=" p-2" style="background-color:whitesmoke; border-radius: 5px;">
                     <div class="row m-1">
                         <div class="col-10">
                             <div class="row">
                                 <div >
-                                    <p class="text-light mt-2 shadow-lg"
+                                    <p class="mt-2"
                                        style="font-size: 25px;font-family: 'Droid Sans Mono'">
                                         <%= result.assignmentTopic %></p>
                                 </div>
@@ -35,10 +35,10 @@
                     </div>
                     <div class="row m-1">
                         <div class="col-md-12">
-                            <div class="row p-2"
-                                 style="background:#56455f; border-radius: 3px;"
-                                 onMouseOver="this.style.background='#5b4964'"
-                                 onMouseOut="this.style.background='#56455f'">
+                            <div class="row p-2":
+                                 style="background:rgb(217, 214, 219); border-radius: 3px;"
+                                 onMouseOver="this.style.background='rgb(195, 191, 197)'"
+                                 onMouseOut="this.style.background='rgb(217, 214, 219)'">
                                 <%- result.topic %>
                             </div>
                         </div>
@@ -47,20 +47,20 @@
                         <div class="row m-1">
                             <div class="col-md-12">
                                 <div class="row"
-                                     style="background:#1f5f44; border-radius: 3px;">
+                                     style=" border-radius: 3px;">
                                     <div class="col-md-2">
-                                        <i class="fa fa-file-archive" style="font-size: 42px;color: #54b6ee"></i>
+                                        <i class="fa fa-file-archive" style="font-size: 42px;color: #6082f3"></i>
                                     </div>
                                     <div class="col-md-7"><a
                                                 href="<%= `../public/uploads/${submitAssignment.files[0].filename}` %>">
-                                            <small style="font-size: 25px;color: white;overflow-wrap: break-word;font-family: 'Ubuntu Mono'">
+                                            <small style="font-size: 25px;;overflow-wrap: break-word;">
                                                 <%= submitAssignment.files[0].originalname %></small></a>
                                     </div>
-                                    <div class="col-md-3 text-light">
+                                    <div class="col-md-3">
                                         <form method="get" name="myFrom"
                                               action="/deletesubmittedassignment/<%= submitAssignment._id %><%= result._id %>"
                                               onclick="deleteTask(event)">
-                                            <div style="float: right" class="text-light mt-1">
+                                            <div style="float: right" class=" mt-1">
                                                 <button class="btn btn-primary btn-sm" type="submit"><i
                                                             class="fa fa-trash"></i>Delete
                                                 </button>
@@ -71,14 +71,14 @@
                             </div>
                         </div>
                     <% } else { %>
-                        <h3 class="text-light">You do not upload something</h3>
+                        <h3>You do not upload something</h3>
                     <% } %>
                 </div>
             </div>
 
             <% if (submitAssignment){ %>
-                <div class="text-light p-3 mt-2"
-                     style="float: right; width: 330px; background-color: rgb(74,57,149); border-radius: 5px;pointer-events:none; opacity: .4;">
+                <div class=" p-3 mt-2"
+                     style="float: right; width: 330px; background-color:whitesmoke; border-radius: 5px;pointer-events:none; opacity: .4;">
                     <div class="form-group">
                         <label for="topic">Write any issues?</label>
                         <textarea rows="4" id="topic" name="issue" class="form-control"></textarea>
@@ -114,8 +114,8 @@
                     </div>
                 </div>
             <% }else { %>
-                <div class="text-light p-3 mt-2"
-                     style="float: right; width: 330px; background-color: rgb(74,57,149); border-radius: 5px;">
+                <div class=" p-3 mt-2"
+                     style="float: right; width: 330px; background-color:rgb(139, 158, 241); border-radius: 5px;">
                     <form action="/submitassignment/<%= result._id %><%= classID %>" method="POST"
                           enctype="multipart/form-data">
                         <div class="form-group">

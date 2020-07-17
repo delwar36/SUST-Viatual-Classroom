@@ -98,9 +98,6 @@
         <% details.forEach(detail => { %>
         <li>
             <a href="/showclass/<%= detail._id %>">
-                <span class="sidenav-link-icon">
-                    <i class="fa fa-address-book"></i>
-                </span>
                 <span class="sidenav-link-title"><%= detail.classname %></span>
             </a>
         </li>
@@ -125,9 +122,6 @@
         <% if (taskID === joinedID) { %>
         <li>
             <a href="/joined/<%= value._id %>">
-                <span class="sidenav-link-icon">
-                    <i class="fa fa-address-book"></i>
-                </span>
                 <span class="sidenav-link-title"><%= value.classname %></span>
             </a>
         </li>

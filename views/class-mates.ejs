@@ -34,8 +34,8 @@
                     <% } %>
                 <% }) %>
             <% }) %>
-            <h2 class="text-light" style="font-family: 'Ubuntu Mono';margin-left: 30px">Total Students :
-                <strong><%= joinedCount %></strong></h2>
+            <big>Total Students :
+                <strong><%= joinedCount %></strong></big>
             <div style="width: 66%;margin-left: 7px">
                 <%- include('./partials/messages') %>
             </div>
@@ -45,7 +45,7 @@
                 <% joinResult.forEach(join => { %>
                     <% let joinerID = join.joiner.toString(); %>
                     <% if (userID === joinerID){ %>
-                        <div style="background:#4f4156;border-radius: 5px;margin: 3px;width: 70%;">
+                        <div style="background:whitesmoke;border-radius: 5px;margin: 3px;width: 70%;">
                             <div class="row">
                                 <div class="col-md-2 thumbnail_medium">
                                     <%if(user.profile_picture){%>
@@ -58,20 +58,20 @@
 
                                 </div>
                                 <div style="height: 92px;width: 2px;background:#74a8ff;"></div>
-                                <div class="col-md-5">
+                                <div class="col-md-5 text-dark">
                                    <div class="mt-2">
-                                       <strong class="text-light">Name : </strong><span
-                                               style="color: #b7e5ff"><%= user.name %></span><br>
-                                       <strong class="text-light">Registration Number : </strong><span
-                                               style="color: #b7e5ff"><%= user.registration %></span><br>
-                                       <strong class="text-light">Email : </strong><span
-                                               style="color: #b7e5ff"><%= user.email %></span>
+                                       <strong>Name : </strong><span
+                                               ><%= user.name %></span><br>
+                                       <strong>Registration Number : </strong><span
+                                              ><%= user.registration %></span><br>
+                                       <strong>Email : </strong><span
+                                              ><%= user.email %></span>
                                    </div>
 
                                 </div>
                                 <div style="height: 92px;width: 2px;background:#74a8ff;"></div>
                                 <div class="col-md-4">
-                                    <h3 class="text-light mt-4">Joined : <strong><%= join.date %></strong></h3>
+                                    <h3 class="text-dark mt-4">Joined : <strong><%= join.date %></strong></h3>
                                 </div>
                             </div>
                         </div>

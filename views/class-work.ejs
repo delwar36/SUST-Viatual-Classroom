@@ -28,8 +28,7 @@
             <% result.forEach(result => { %>
                 <% let select = result.select.toString(); %>
                 <% if (select === '1'){ %>
-                    <div style="border-radius: 5px;margin: 3px;width: 70%;">
-                        <div style="height: 1px;width: 100%;background:#374f77;"></div>
+                    <div style="border-radius: 5px;margin: 3px;width: 70%;background-color: whitesmoke;">
                         <div class="row">
                             <div class="col-md-2">
                                <div style="margin-top: 12px">
@@ -39,13 +38,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="row">
-                                    <p class="text-light mt-1" style="font-family: 'Ubuntu Mono';font-size: 30px"
-                                       style="color: #7abaff"><%- result.assignmentTopic %></p>
-                                    <small class="text-light mt-4">Due time : <strong><%= result.Due %></strong></small>
+                                    <p class=" mt-1" style="font-family: 'Ubuntu Mono';font-size: 30px"
+                                       ><%- result.assignmentTopic %></p>
+                                    <small class="mt-4">Due time : <strong><%= result.Due %></strong></small>
                                 </div>
                             </div>
                         </div>
-                        <div style="height: 1px;width: 100%;background:#374f77;"></div>
                     </div>
                 <% } %>
             <% }); %>

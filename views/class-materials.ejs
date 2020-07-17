@@ -175,7 +175,7 @@
                     <div class="row">
                         <div class="col">
                             <p class="uk-text-bold"
-                               style="font-size: 40px;font-family: 'Droid Sans Mono'"><%= result.classname %></p>
+                               style="font-size: 30px;font-family: 'Droid Sans Mono'"><%= result.classname %></p>
                             <p class="ml-2">BATCH : <strong><%= result.batch %></strong></p>
                         </div>
 
@@ -236,7 +236,7 @@
 
                                             </div>
                                             <div style="margin-left: 12px;">
-                                                <p class="mt-2 shadow-lg"><%= user.name %>
+                                                <p class="mt-2 shadow-lg text-dark"><%= user.name %>
                                                     <span><sup><strong class="text-primary"><%= res.date %></strong></sup></span></p>
                                             </div>
                                         </div>
@@ -479,7 +479,7 @@
                         <% let select = res.select.toString(); %>
                         <% if (res.isPinned === false) { %>
                             <div class="p-2 m-2"
-                                 style="background-color: #eee5e5; border-radius: 5px;">
+                                 style="background-color: whitesmoke; border-radius: 5px;">
                                 <% if(select === '0') { %>
                                     <div class="row m-1">
                                         <div class="col-10">
@@ -810,7 +810,7 @@
                     <% if (res != null){ %>
                         <% let select = res.select.toString(); %>
                         <div class="p-2 m-2"
-                             style="background-color: #eee7e7b7; border-radius: 5px;">
+                             style="background-color:whitesmoke; border-radius: 5px;">
                             <% if(select === '0') { %>
                                 <div class="row m-1">
                                     <div class="thumbnail1">
@@ -855,7 +855,7 @@
                                                                 </a>
                                                             </div>
                                                             <div class="col-md-8">
-                                                                <div style="">
+                                                                <div>
                                                                     <small class="text-light"
                                                                            style="overflow-wrap: break-word"><strong><%= result.originalname %></strong></small>
                                                                 </div>
@@ -966,10 +966,10 @@
                                             <div>
                                                 <p class="text-light shadow-lg"><strong
                                                             style="color: #c4c0d2;"><%= join.owner_name %></strong>
-                                                    posted new <span><strong
-                                                                style="color: #ba8b00">ASSIGNMENT</strong></span>
+                                                   <span class="text-secondary"> posted new</span><span><strong
+                                                                style="color: #ba8b00"> ASSIGNMENT</strong></span>
                                                     <sup><small><strong
-                                                                    class="text-light"><%= res.date %></strong></small></sup>
+                                                                    class="text-primary"><%= res.date %></strong></small></sup>
                                                 </p>
                                             </div>
                                         </div>
