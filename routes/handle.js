@@ -293,6 +293,8 @@ router.post('/postcomment/:pathclone/:postid/:classid', ensureAuthenticated, (re
     let classID = request.params.classid;
     let pathClone = request.params.pathclone;
 
+    console.log(pathClone)
+
     let errors = [];
     const request_path = (request.path);
 
@@ -306,7 +308,7 @@ router.post('/postcomment/:pathclone/:postid/:classid', ensureAuthenticated, (re
     });
 
     comment.save().then(result => {
-        //console.log(pathClone);
+        console.log(result);
         if (pathClone === 'showclass') {
             response.redirect(`/showclass/${classID}`);
         } else {

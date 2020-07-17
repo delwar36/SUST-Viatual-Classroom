@@ -164,7 +164,7 @@
                                 create new assignment then click add task button!</p>
                             <a href="/uploadmaterials/<%= result._id %>"
                                class="btn shadow"
-                               style="background-color: #3579ba;color:white;width: 100%;text-decoration: none;!important;font-family: 'Ubuntu Mono';font-size: 20px"
+                               style="background-color: #3579ba;color:white;width: 100%;text-decoration: none !important;font-family: 'Ubuntu Mono';font-size: 20px"
                                onMouseOver="this.style.background='#668fbb';"
                                onMouseOut="this.style.background='#3579ba'"><i
                                         class="fa fa-plus-square mr-2" style="font-size: 23px"></i>Add new task</a>
@@ -190,9 +190,9 @@
                         <div>
                             <a href="#compose-modal" data-toggle="modal"
                                class="btn shadow"
-                               style="background-color: #ba8b00;color:white;width: 100%;text-decoration: none;!important;font-family: 'Abyssinica SIL';font-size: 20px"
+                               style="background-color: #ba8b00;color:white;width: 100%;text-decoration: none !important;font-family: 'Abyssinica SIL';font-size: 20px"
                                onMouseOver="this.style.background='#b0c217';this.style.color='white'"
-                               onMouseOut="this.style.background='#ba8b00'">Send code to student</a>
+                               onMouseOut="this.style.background='#ba8b00'"><i class="fa fa-send mr-2" style="font-size: 23px"></i>Send code to student</a>
                         </div>
                     </div>
                 <% } %>
@@ -204,7 +204,7 @@
                                 announce !</p>
                             <a class="btn btn-success text-light shadow" data-toggle="modal"
                                data-target="#announce"
-                               style="width: 100%;text-decoration: none;!important;font-family: 'Ubuntu Mono';font-size: 20px"><i
+                               style="width: 100%;text-decoration: none !important;font-family: 'Ubuntu Mono';font-size: 20px"><i
                                         class="fa fa-microphone mr-2" style="font-size: 25px"></i>Announcements</a>
                         </div>
                     </div>
@@ -219,8 +219,7 @@
                     <% if (res != null){ %>
                         <% let select = res.select.toString(); %>
                         <% if(select === '0' && res.isPinned === true) { %>
-                            <div class=" p-2 m-2"
-                                 style="background-color: rgb(3, 25, 85); border-radius: 5px;">
+                            <div class=" p-2 m-2" border-radius: 5px;">
                                 <div class="row m-1">
                                     <div class="col-10">
                                         <div class="row">
@@ -238,7 +237,7 @@
                                             </div>
                                             <div style="margin-left: 12px;">
                                                 <p class="mt-2 shadow-lg"><%= user.name %>
-                                                    <span><sup><strong><%= res.date %></strong></sup></span></p>
+                                                    <span><sup><strong class="text-primary"><%= res.date %></strong></sup></span></p>
                                             </div>
                                         </div>
                                     </div>
@@ -254,8 +253,7 @@
                                                     <i class="fa fa-chevron-circle-down"
                                                        style="font-size: 20px;color: white" aria-hidden="true"></i>
                                                 </a>
-                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink"
-                                                     style="background:#8ec7ce;">
+                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                                                     <a class="dropdown-item"
                                                        href="/updateclassmaterials/<%= res._id %>"><i
                                                                 class="fa fa-pencil-square-o"
@@ -687,11 +685,9 @@
                                                         </div>
                                                         <div>
                                                             <p class="text-light mt-1 shadow-lg" style="color: white">
-                                                                <strong
-                                                                        style="color: #c4c0d2"><%= user.name %></strong>
-                                                                posted new <span><strong
-                                                                            style="color: #ba8b00">ASSIGNMENT </strong><strong
-                                                                            class="text-light"><sup><%= res.date %></sup></strong></span>
+                                                                <strong class="text-dark"><%= user.name %></strong><span class="text-secondary"> posted new</span><span><strong
+                                                                            style="color: #ba8b00"> ASSIGNMENT </strong><strong
+                                                                            class="text-primary"><sup><%= res.date %></sup></strong></span>
                                                             </p>
                                                         </div>
                                                     </div>
@@ -830,7 +826,7 @@
                                     </div>
                                     <div style="margin-left: 12px;">
                                         <p class="shadow-lg mt-2"><%= join.owner_name %>
-                                            <span><sup><strong><%= res.date %></strong></sup></span></p>
+                                            <span><sup><strong  class="text-primary"><%= res.date %></strong></sup></span></p>
                                     </div>
                                 </div>
                                 <div class="row m-1">

@@ -2,7 +2,7 @@
 <section style="margin-top: 30px">
     <div class="container" style="margin-left: 20%">
         <div class="row">
-            <div class="col-md-4 m-1 update-form" style="background-color: rgb(76, 65, 85);  border-radius: 3px;">
+            <div class="col-md-4 m-1 update-form" style="background-color: whitesmoke;  border-radius: 3px;">
                 <% if (user.profile_picture == null) { %>
                     <img src="../public/images/default_image.ico" height="200px" width="200px"
                          style="border-radius: 5px;">
@@ -17,10 +17,10 @@
                                 style="background-color: rgb(87, 102, 109);"><%= user.email %></span></p>
                 </div>
             </div>
-            <div class="col-md-5 m-1 update-form" style="background-color: rgb(94, 92, 95); border-radius: 3px;">
+            <div class="col-md-5 m-1 update-form" style="background-color: rgb(223, 213, 213); border-radius: 3px;">
                 <form action="/profileupdate/<%= user._id %>" method="POST" enctype="multipart/form-data">
                     <%- include('./partials/messages') %>
-                    <h1 class="login-h1 mb-2" style="color: rgb(202, 189, 214);">Update Your Profile</h1>
+                    <h1 class="login-h1 mb-2">Update Your Profile</h1>
                     <div class="form-group">
                         <label for="profile" class="control-label" style="color: #23cd23">Choose your Picture
                             <strong><span

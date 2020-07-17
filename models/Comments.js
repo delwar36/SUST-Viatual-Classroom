@@ -15,7 +15,6 @@ const CommentSchema = new mongoose.Schema({
     },
     comment_owner_profile_picture: {
         type: String,
-        required: true
     },
     comment_task: {
         type: mongoose.Schema.Types.ObjectId,

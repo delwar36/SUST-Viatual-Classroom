@@ -62,6 +62,7 @@ router.get('/showclass/:id', ensureAuthenticated, (request, response) => {
                                     // response.send(task);
                                     let str = request_path.split('/');
                                     let path_clone = str[1];
+                                    console.log(path_clone)
                                     response.render('class-materials', {
                                         user: request.user,
                                         path: request_path,

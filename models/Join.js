@@ -11,7 +11,6 @@ const JoinSchema = new mongoose.Schema({
     },
     owner_profile_picture: {
         type: String,
-        required: true
     },
     joiner: {
         type: mongoose.Schema.Types.ObjectId,
