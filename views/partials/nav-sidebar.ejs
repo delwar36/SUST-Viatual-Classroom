@@ -49,8 +49,8 @@
     </div>
 </nav>
 
-<nav class="sidenav" data-sidenav data-sidenav-toggle="#sidenav-toggle" style="background-color: rgb(70, 62, 62);">
-    <div class="sidenav-brand" style="background-color: rgb(109, 63, 194);">
+<nav class="sidenav text-dark" data-sidenav data-sidenav-toggle="#sidenav-toggle">
+    <div class="sidenav-brand bg-primary">
 
         <% if(path === '/' || path === '/sign-up' || path === '/login' || path === '/register' || path === '/verification' || path === '/verify' || path === '/updatepassword' || path === '/updateyourpassword'){ %>
         <img id="picture" src="../public/images/default_image.ico" alt="Default Profile Image"
@@ -88,12 +88,11 @@
 
     </div>
 
-    <div class="sidenav-header text-light">
+    <div class="sidenav-header">
         Teaching
     </div>
 
     <ul class="sidenav-menu">
-
         <% if(path === '/dashboard-classes'){ %>
         <% if (details != null){ %>
         <% details.forEach(detail => { %>
@@ -111,7 +110,7 @@
 
     </ul>
 
-    <div class="sidenav-header text-light">
+    <div class="sidenav-header">
         Enrolled
     </div>
     <ul class="sidenav-menu">
@@ -140,7 +139,7 @@
 
     </ul>
 
-    <div class="sidenav-header text-light">
+    <div class="sidenav-header">
         Authentication
     </div>
     <ul class="sidenav-menu">
@@ -166,7 +165,7 @@
     </ul>
 
 
-    <div class="sidenav-header text-light">
+    <div class="sidenav-header">
         Settings
     </div>
     <ul class="sidenav-menu">

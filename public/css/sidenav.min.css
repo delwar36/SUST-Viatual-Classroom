@@ -1,7 +1,6 @@
 .sidenav {
-  background: #212121;
+  background: white;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
-  
   font-size: 16px;
   font-weight: 400;
   height: 100%;
@@ -24,20 +23,18 @@
 }
 .sidenav-dropdown,
 .sidenav-header {
-  border-bottom: 1px solid #424242;
+  border-bottom: 1px solid rgb(229, 226, 226);
   margin: 0;
 }
 .sidenav-header {
   background: 0 0;
-  color: #757575;
+  color:#007bff;
   font-size: 19.2px;
-  line-height: 32px;
-  padding: 16px 24px 15px;
+  padding: 5px 22px 12px;
 }
 .sidenav-header small {
   display: block;
   font-size: 14.4px;
-  line-height: 16px;
 }
 .sidenav-menu {
   list-style: none;
@@ -56,15 +53,15 @@
 }
 .sidenav-menu a {
   background: 0 0;
-  color: #bdbdbd;
+  color: #4095f0;
   display: block;
-  line-height: 24px;
-  padding: 16px 32px;
+  line-height: 35px;
+  padding: 10px 20px;
   text-decoration: none;
 }
 .sidenav-menu a:hover {
-  background: #616161;
-  color: #bdbdbd;
+  background:rgb(229, 226, 226);
+  color: #007bff;
 }
 .sidenav-menu a.active,
 .sidenav-menu a.active .sidenav-dropdown-icon,
@@ -72,15 +69,14 @@
   color: #fafafa;
 }
 .sidenav-link-icon {
-  color: #757575;
-  display: block;
-  height: 24px;
-  left: 24px;
-  width: 24px;
+  color: #4095f0;
+  
+  
+
 }
 .sidenav-link-title {
   display: block;
-  padding: 0 16px 0 40px;
+  padding: 0 10px 0 40px;
 }
 .sidenav-dropdown {
   display: none;
