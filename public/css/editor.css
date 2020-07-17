@@ -1,9 +1,9 @@
 .richText {
     position: relative;
-    background-color: #2e739c;
+    background-color: whitesmoke;
     border-radius: 5px;
     border: #d0d0d0 solid 1px;
-    color: #fff;
+    color: black;
     width: 100%;
 }
 .richText .richText-form {
@@ -234,8 +234,8 @@ div.richText-dropdown {
     padding: 10px 15px;
 }
 .richText .richText-toolbar ul li a:hover {
-    background-color: #ffffff;
-    color: #333333;
+    background-color: #007bff;
+    color: white;
 }
 .richText .richText-toolbar ul li[data-disable="true"] {
     opacity: 0.1;
@@ -265,11 +265,8 @@ li:not([data-disable="true"]).is-selected
 }
 .richText .richText-editor {
     padding: 20px;
-    background-color: #244F6F;
-    border-left: #e0e0e0 solid 1px;
-    font-family: Calibri, Verdana, Helvetica, sans-serif;
     height: 300px;
-    color: #fff;
+    color: black;
     outline: none;
     overflow-y: scroll;
     overflow-x: auto;
@@ -289,7 +286,8 @@ li:not([data-disable="true"]).is-selected
     border: #efefef solid 1px;
 }
 .richText .richText-editor:focus {
-    border-left: #3498db solid 1px;
+    border-left: #3498db solid 2px;
+    border-right: #3498db solid 2px;
 }
 .richText .richText-initial {
     margin-bottom: -4px;

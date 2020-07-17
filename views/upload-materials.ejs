@@ -7,7 +7,7 @@
                     <div class="purple-square" style="padding: 25px;border-radius: 10px">
                         <form action="/classmaterialsupload/<%= task %>" method="POST" enctype="multipart/form-data">
                             <div class="form-group nopadding">
-                                <label style="font-family: 'Ubuntu Mono';font-size: 20px;color: white"
+                                <label 
                                        for="textarea">Give
                                     Description</label>
                                 <div class="page-wrapper box-content">
@@ -15,8 +15,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                    <label for="option" style="font-family: 'Ubuntu Mono';font-size: 20px"
-                                           class="text-light">Select your option</label>
+                                    <label for="option"
+                                          >Select your option</label>
                                     <select name="select" class="selectpicker" id="option" onchange="optionSelect()">
                                         <option value="0">Materials</option>
                                         <option value="1">Assignment</option>
@@ -24,13 +24,12 @@
                             </div>
                             <div class="form-group uk-hidden" id="assignmentTopic">
                                 <div class="form-group">
-                                    <label for="assignmentTopic" style="font-family: 'Ubuntu Mono';font-size: 20px"
-                                           class="text-light">Give your topic</label>
+                                    <label for="assignmentTopic" >Give your topic</label>
                                     <input class="form-control" style="width: 350px" id="assignmentTopic" name="assignmentTopic" placeholder="topic">
                                 </div>
                             </div>
                             <div class="form-group" id="hidden">
-                                <label for="file" style="font-family: 'Ubuntu Mono';font-size: 20px" class="text-light">Add
+                                <label for="file" >Add
                                     have any files(.jpg .png .gif .zip .pdf .doc .txt)(MAX-1mb)</label>
                                 <div class="row">
                                     <div class="col-md-2" style="margin-top: 12px">
@@ -50,20 +49,19 @@
                                 </div>
                             </div>
                             <div class="form-group uk-hidden" id="time">
-                                <label for="time1" style="font-family: 'Ubuntu Mono';font-size: 20px"
-                                       class="text-light">Give Due time</label>
+                                <label for="time1">Give Due time</label>
                                 <input id="time1" name="duetime" data-format="hh:mm A" class="form-control sel-time-am"
                                        style="width: 350px" placeholder="hh:mm"
                                        type="text">
                             </div>
                             <div class="form-group uk-hidden" id="date">
-                                <label for="date" style="font-family: 'Ubuntu Mono';font-size: 20px" class="text-light">Give
+                                <label for="date" >Give
                                     due date</label>
                                 <input type="date" id="date" class="form-control" style="width: 350px" name="due">
                             </div>
                             <div class="row justify-content-center align-self-center mt-3">
                                 <div class="form-group btn-group-lg">
-                                    <button type="submit" class="btn btn-primary"><i class="fa fa-upload">Upload your materials/assignment</i></button>
+                                    <button type="submit" class="btn btn-primary"><i class="fa fa-upload"></i>Upload your materials/assignment</button>
                                 </div>
                             </div>
                         </form>

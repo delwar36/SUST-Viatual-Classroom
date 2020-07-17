@@ -9,7 +9,7 @@
                             <form action="/classmaterialsupdate/<%= result._id %>" method="POST"
                                   onsubmit="return validateForm()">
                                 <div class="form-group nopadding">
-                                    <label style="font-family: 'Ubuntu Mono';font-size: 20px" class="text-light"
+                                    <label style="font-family: 'Ubuntu Mono';font-size: 20px" 
                                            for="textarea">Give
                                         topic/description</label>
                                     <div class="page-wrapper box-content">
@@ -33,7 +33,7 @@
 <% } %>
 <% if (path_clone == 'assignment'){ %>
     <section>
-        <div class="container mt-4">
+        <div class="container mt-4 text-dark">
             <div class="row">
                 <div class="col">
                     <div class="purple-square-container">
@@ -41,8 +41,7 @@
                             <form action="/classassignmentsupdate/<%= result._id %>" method="POST"
                                   onsubmit="return validateForm()">
                                 <div class="form-group nopadding">
-                                    <label style="font-family: 'Ubuntu Mono';font-size: 20px" class="text-light"
-                                           for="textarea">Give
+                                    <label for="textarea">Give
                                         topic/description</label>
                                     <div class="page-wrapper box-content">
                                         <textarea class="content" name="topic"
@@ -53,16 +52,15 @@
                                 <% let date = dateTime[0] %>
                                 <% let time = dateTime[1] %>
                                 <div class="form-group" id="time">
-                                    <label for="time1" style="font-family: 'Ubuntu Mono';font-size: 20px"
-                                           class="text-light">Give Due time</label>
+                                    <label for="time1"
+                                        >Give Due time</label>
                                     <input id="time1" name="duetime" data-format="hh:mm A"
                                            class="form-control sel-time-am" style="width: 300px" placeholder="hh:mm"
                                            type="text" value="<%= time %>">
                                 </div>
                                 <div class="form-group" id="date">
                                     <label for="date" style="font-family: 'Ubuntu Mono';font-size: 20px"
-                                           class="text-light">Give
-                                        due date <small>(Previous) : <strong><%= date %></strong></small></label>
+                                          >Give due date <small>(Previous) : <strong><%= date %></strong></small></label>
                                     <input type="date" id="date" class="form-control" style="width: 300px" name="due" value="<%= date %>">
                                 </div>
 

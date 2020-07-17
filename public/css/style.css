@@ -240,7 +240,7 @@
 }
 
 .purple-square {
-  background-color: #244F6F;
+  background-color: whitesmoke;
   width: 80%;
 }
 
@@ -267,5 +267,9 @@
 .thumbnail2 img {
   height: 33px !important;
   width: 33px !important;
+}
+
+.small-size{
+  font-size: 17px;
 }
 
