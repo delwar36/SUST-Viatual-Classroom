@@ -31,7 +31,7 @@
                 <li class="nav-item">
                     <div class="dropdown">
                         <div onclick="myFunction()" class="dropbtn btn" style="background-color: rgb(127, 125, 240);" data-toggle="tooltip"
-                            data-placement="bottom" title="Create or Join a class"><i class="fa fa-plus"></i>
+                            data-placement="bottom" title="Create or Join a class"><img onclick="myFunction()" id="picture" src="../public/images/add.png"/>
                         </div>
                         <div id="myDropdown" class="dropdown-content">
                             <a href="" data-toggle="modal" data-target="#create" class=" text-dark"><i
@@ -187,11 +187,11 @@
 <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     style="margin-left: 33%;">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content text-dark" style="background-color:white">
+        <div class="modal-content text-dark" style="background-color:whitesmoke">
             <div class="modal-header">
-                <h3 class="modal-title" id="exampleModalLongTitle">Create Your New
+                <h4 class="modal-title" id="exampleModalLongTitle">Create Your New
                     Class
-                </h3>
+                </h4>
                 <button type="button" class="close p-1" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -235,7 +235,7 @@
 <div class="modal fade" id="join" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     style="margin-left: 33%; width: 380px">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content" style="background-color:white">
+        <div class="modal-content" style="background-color:whitesmoke">
             <form action="/joinclass" method="POST">
                 <div class="modal-body">
                     <div class="input-group-sm">
