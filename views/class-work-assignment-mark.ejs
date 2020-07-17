@@ -3,136 +3,130 @@
     <div class="container">
         <% let index = 0; %>
         <div class="row m-4  justify-content-center align-self-center">
-            <div class="row">
-                <%- include('./partials/messages') %>
-            </div> 
-                <b>Assignment Description : </b><br/>  <p><%- file.topic %>
-</p>
-    
+            <div> <%- include('./partials/messages') %>
+               <div style="border-radius: 3px; background-color: whitesmoke; padding: 0 10px 0 10px;">
+                    <b>Assignment Description</b>
+                    <small style="font-size: 15px;"><%- file.topic %>
+                        </p>
+               </div>
+            </div>
         </div>
         <div class="row justify-content-center align-self-center">
-            
+
             <% if (submit){ %>
-                <% submit.forEach(submittedUser => { %>
-                    <div class="col-lg-5 col-md-10 m-1" style="background-color: whitesmoke;border-radius: 3px;">
-                        <div class="row mt-1">
-                            <div class="col-2">
-                                <% if (submittedUser.submittedBy[0].picture){ %>
-                                    <img id="picture"
-                                         src="<%= `../public/uploads/${submittedUser.submittedBy[0].picture}` %>"
-                                         alt="Default Profile Image"
-                                         class="ml-1 rounded-circle"
-                                         height="50px" width="50px"><br>
-                                <% }else { %>
-                                    <img id="picture" src="../public/images/default_image.ico"
-                                         alt="Default Profile Image"
-                                         class="ml-1 rounded-circle"
-                                         height="60px" width="60px">
-                                <% } %>
-                            </div>
-                            <div class="col-3">
-                                <small style="font-size: 12px">Submitted By:</small>
-                                <div class="row">
-                                    <strong style="font-size: 13px"><%= submittedUser.submittedBy[0].name %></strong>
-                                </div>
-                            </div>
-                            <div class="col-7">
-                                <div class="row showhim"
-                                     style="background:rgb(230, 223, 223); border-radius: 3px;"
-                                     onMouseOver="this.style.background='rgb(199, 185, 185)'"
-                                     onMouseOut="this.style.background='rgb(230, 223, 223)'">
-                                    <div class="col-2">
-                                        <a href="<%= `../public/uploads/${submittedUser.files[0].filename}` %>">
-                                            <i class="fa fa-file-archive"
-                                               style="font-size: 40px;color: #6ba2ee;"
-                                               onMouseOver="this.style.color='#fff'"
-                                               onMouseOut="this.style.color='#b2c1d6'"></i></a>
-                                    </div>
-                                    <div class="col-8">
-                                        <small style="font-size: 15px;font-family: 'Ubuntu Mono'"><%= submittedUser.files[0].originalname %></small>
-                                    </div>
-                                    <div class="col-1 showme">
-                                        <a href="<%= `../public/uploads/${submittedUser.files[0].filename}` %>"
-                                           style="text-decoration: none;" download><i
-                                                    class="fa fa-download text-light"
-                                                    style="font-size: 18px;color: #d6d6d6"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12" style="font-size: 18px">
-                                <div style="word-wrap: break-word;">
-                                    <small>Issue: <strong><%= submittedUser.issue %></strong></small>
-                                </div>
-                                <div style="word-wrap: break-word;">
-                                    <small>Submitted Time: <strong><%= submittedUser.date %></strong></small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row" style="margin-top: 5px">
-                            <div class="col-3">
-                                <p class="btn btn-outline-success btn-sm">All Submitted Student's</p>
-                            </div>
-                            <div class="col-9">
-                                <!--                                <div class="hidden-menu<%= index.toString() %>" style="display: none;">-->
-                                <table class="table table-sm uk-text-small table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Registration</th>
-                                        <th scope="col">Mark</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <% for (let i = 0; i < submittedUser.groups.length; i++){ %>
-                                        <tr>
-                                            <th scope="row"><%= i + 1 %></th>
-                                            <td><%= submittedUser.groups[i].name %></td>
-                                            <td><%= submittedUser.groups[i].registration %></td>
-                                            <% if (i === 0) { %>
-                                                <td rowspan="<%= submittedUser.groups.length %>"
-                                                    style="font-size: 22px; font-family: 'Ubuntu Mono';text-align:center;vertical-align: center"><%= submittedUser.mark %></td>
-                                            <% } %>
-                                        </tr>
-                                    <% } %>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <form action="/updateassignmentmark/<%= submittedUser._id %>/<%= postID %>" method="post">
-                            <div class="row mb-2">
-                                <div class="col-5 input-group-sm">
-                                    <input type="text" style="height: 32px;" class="form-control" name="mark" required
-                                           placeholder="Give mark">
-                                </div>
-                                <div class="col-7">
-                                    <div class="row">
-                                        <div style="float: left">
-                                            <button id="commentSubmit" type="submit"
-                                                    class="btn btn-primary btn-sm"><i class="material-icons text-light"
-                                                                                      style="font-size: 16px !important;color: #2436cd">add</i><small>Add
-                                                    Mark</small>
-                                            </button>
-                                        </div>
-                                        <div class="m-2"></div>
-                                        <div style="float: right">
-                                            <button id="commentSubmit" type="submit"
-                                                    class="btn btn-secondary btn-sm"><i
-                                                        class="material-icons text-light"
-                                                        style="font-size: 16px !important;color: #2436cd">update</i><small>Update</small>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
+            <% submit.forEach(submittedUser => { %>
+            <div class="col-lg-5 col-md-10 m-1" style="background-color: whitesmoke;border-radius: 3px;">
+                <div class="row mt-1">
+                    <div class="col-2">
+                        <% if (submittedUser.submittedBy[0].picture){ %>
+                        <img id="picture" src="<%= `../public/uploads/${submittedUser.submittedBy[0].picture}` %>"
+                            alt="Default Profile Image" class="ml-1 rounded-circle" height="50px" width="50px"><br>
+                        <% }else { %>
+                        <img id="picture" src="../public/images/default_image.ico" alt="Default Profile Image"
+                            class="ml-1 rounded-circle" height="60px" width="60px">
+                        <% } %>
                     </div>
-                <% }) %>
+                    <div class="col-3">
+                        <small style="font-size: 12px">Submitted By:</small>
+                        <div class="row">
+                            <strong style="font-size: 13px"><%= submittedUser.submittedBy[0].name %></strong>
+                        </div>
+                    </div>
+                    <div class="col-7">
+                        <div class="row showhim" style="background:rgb(230, 223, 223); border-radius: 3px;"
+                            onMouseOver="this.style.background='rgb(199, 185, 185)'"
+                            onMouseOut="this.style.background='rgb(230, 223, 223)'">
+                            <div class="col-2">
+                                <a href="<%= `../public/uploads/${submittedUser.files[0].filename}` %>">
+                                    <i class="fa fa-file-archive" style="font-size: 40px;color: #6ba2ee;"
+                                        onMouseOver="this.style.color='#fff'"
+                                        onMouseOut="this.style.color='#b2c1d6'"></i></a>
+                            </div>
+                            <div class="col-8">
+                                <small
+                                    style="font-size: 15px;font-family: 'Ubuntu Mono'"><%= submittedUser.files[0].originalname %></small>
+                            </div>
+                            <div class="col-1 showme">
+                                <a href="<%= `../public/uploads/${submittedUser.files[0].filename}` %>"
+                                    style="text-decoration: none;" download><i class="fa fa-download text-light"
+                                        style="font-size: 18px;color: #d6d6d6"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12" style="font-size: 18px">
+                        <div style="word-wrap: break-word;">
+                            <small>Issue: <strong><%= submittedUser.issue %></strong></small>
+                        </div>
+                        <div style="word-wrap: break-word;">
+                            <small>Submitted Time: <strong><%= submittedUser.date %></strong></small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 5px">
+                    <div class="col-3">
+                        <p class="btn btn-outline-success btn-sm">All Submitted Student's</p>
+                    </div>
+                    <div class="col-9">
+                        <!--                                <div class="hidden-menu<%= index.toString() %>" style="display: none;">-->
+                        <table class="table table-sm uk-text-small table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Registration</th>
+                                    <th scope="col">Mark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (let i = 0; i < submittedUser.groups.length; i++){ %>
+                                <tr>
+                                    <th scope="row"><%= i + 1 %></th>
+                                    <td><%= submittedUser.groups[i].name %></td>
+                                    <td><%= submittedUser.groups[i].registration %></td>
+                                    <% if (i === 0) { %>
+                                    <td rowspan="<%= submittedUser.groups.length %>"
+                                        style="font-size: 22px; font-family: 'Ubuntu Mono';text-align:center;vertical-align: center">
+                                        <%= submittedUser.mark %></td>
+                                    <% } %>
+                                </tr>
+                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <form action="/updateassignmentmark/<%= submittedUser._id %>/<%= postID %>" method="post">
+                    <div class="row mb-2">
+                        <div class="col-5 input-group-sm">
+                            <input type="text" style="height: 32px;" class="form-control" name="mark" required
+                                placeholder="Give mark">
+                        </div>
+                        <div class="col-7">
+                            <div class="row">
+                                <div style="float: left">
+                                    <button id="commentSubmit" type="submit" class="btn btn-primary btn-sm"><i
+                                            class="material-icons text-light"
+                                            style="font-size: 16px !important;color: #2436cd">add</i><small>Add
+                                            Mark</small>
+                                    </button>
+                                </div>
+                                <div class="m-2"></div>
+                                <div style="float: right">
+                                    <button id="commentSubmit" type="submit" class="btn btn-secondary btn-sm"><i
+                                            class="material-icons text-light"
+                                            style="font-size: 16px !important;color: #2436cd">update</i><small>Update</small>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <% }) %>
             <% }else { %>
-                <h2 style="font-family: Ubuntu">Till, does not upload any one</h2>
+            <h2 style="font-family: Ubuntu">Till, does not upload any one</h2>
             <% } %>
         </div>
     </div>
