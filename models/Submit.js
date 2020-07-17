@@ -27,6 +27,9 @@ const SubmitSchema = new mongoose.Schema({
     mark:{
         type: String,
     },
+    assignmentTopic: {
+        type: String,
+    },
     submittedBy: {
         type: Array
     },

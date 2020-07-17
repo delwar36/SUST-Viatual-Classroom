@@ -11,8 +11,8 @@ const Submit = require('../models/Submit');
 const Mark = require('../models/Mark');
 const fs = require('fs');
 
-const {ensureAuthenticated} = require('../configuration/auth');
-const {forwardAuthenticated} = require('../configuration/auth');
+const { ensureAuthenticated } = require('../configuration/auth');
+const { forwardAuthenticated } = require('../configuration/auth');
 
 router.get('/submit/:id', ensureAuthenticated, (request, response) => {
     const request_path = (request.path);
@@ -123,9 +123,21 @@ let upload = multer({
 
 router.get('/joinedclassgrade/:id', ensureAuthenticated, (request, response) => {
     const request_path = (request.path);
-    response.render('grades', {
-        path: request_path,
-        user: request.user
+    Submit.find({
+        classID: request.params.id
+    }, (error, submit) => {
+        if (error) {
+            console.log(error)
+        } else {
+           
+            response.render('grades', {
+                path: request_path,
+                user: request.user,
+                submit,
+                classID: request.params.id,
+                path_clone: 'joined'
+            });
+        }
     });
 });
 
@@ -141,35 +153,47 @@ router.get('/indvidualassignmentmark/:id', ensureAuthenticated, (request, respon
         select: "1"
 
     }, (error, file) => {
-       if (error){
-           console.log(error)
-       } else {
-           Submit.find({
-               assignmentID: postID,
-               classID: classID
-           }, (error, submit) => {
-               if (error) {
-                   console.log(error)
-               } else {
-                   response.render('class-work-assignment-mark', {
-                       path: request_path,
-                       user: request.user,
-                       submit,
-                       file,
-                       postID
-                   });
-               }
-           });
-       }
+        if (error) {
+            console.log(error)
+        } else {
+            Submit.find({
+                assignmentID: postID,
+                classID: classID
+            }, (error, submit) => {
+                if (error) {
+                    console.log(error)
+                } else {
+                    response.render('class-work-assignment-mark', {
+                        path: request_path,
+                        user: request.user,
+                        submit,
+                        file,
+                        postID
+                    });
+                }
+            });
+        }
     });
 
 
 });
 router.get('/showclassgrade/:id', ensureAuthenticated, (request, response) => {
     const request_path = (request.path);
-    response.render('grades', {
-        path: request_path,
-        user: request.user
+    Submit.find({
+        classID: request.params.id
+    }, (error, submit) => {
+        if (error) {
+            console.log(error)
+        } else {
+            console.log(submit)
+            response.render('grades', {
+                path: request_path,
+                user: request.user,
+                submit,
+                classID: request.params.id,
+                path_clone:'showclass'
+            });
+        }
     });
 });
 
@@ -182,7 +206,7 @@ router.post('/submitassignment/:id', upload.array('submit_files', 2), ensureAuth
     let dateTime = time.getTime();
     let errors = [];
     let date = new Date();
-    let localTime = date.toLocaleString('en-US', {hour: 'numeric', minute: 'numeric', hour12: true});
+    let localTime = date.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true });
 
     User.find({}, (error, user) => {
         if (error) {
@@ -229,32 +253,45 @@ router.post('/submitassignment/:id', upload.array('submit_files', 2), ensureAuth
                 picture: request.user.profile_picture
             };
             submittedByUser.push(userInfo);
-            const submit = new Submit({
-                issue: issue,
-                submittedBy: submittedByUser,
-                date: dateTime + " | " + localTime,
-                owner: request.user.id,
-                files: request.files,
-                mark: null,
-                groups: submitUserInfo,
-                assignmentID: assignmentID,
-                classID: classID
-            });
-            submit.save().then(result => {
-                request.flash('success_message', 'Your class assignment submitted successfully...');
-                response.redirect(`/submit/${request.params.id}`);
-            }).catch(error => {
+
+            File.findOne({
+                _id: assignmentID,
+                select:1
+            }, (error, file) => {
                 if (error) {
-                    errors.push({
-                        message: error
+                    console.log(error)
+                } else {
+                    const submit = new Submit({
+                        issue: issue,
+                        submittedBy: submittedByUser,
+                        date: dateTime + " | " + localTime,
+                        owner: request.user.id,
+                        files: request.files,
+                        mark: null,
+                        groups: submitUserInfo,
+                        assignmentID: assignmentID,
+                        assignmentTopic: file.assignmentTopic,
+                        classID: classID
                     });
+                    submit.save().then(result => {
+                        request.flash('success_message', 'Your class assignment submitted successfully...');
+                        response.redirect(`/submit/${ request.params.id }`);
+                    }).catch(error => {
+                        if (error) {
+                            errors.push({
+                                message: error
+                            });
+                        }
+                        response.render('class-work-submit', {
+                            errors,
+                            user: request.user,
+                            path: request_path
+                        });
+                    });
+
                 }
-                response.render('class-work-submit', {
-                    errors,
-                    user: request.user,
-                    path: request_path
-                });
-            });
+            })
+
         }
     });
 });
@@ -265,9 +302,9 @@ router.post('/updateassignmentmark/:submitid/:postid', ensureAuthenticated, (req
     let submitID = request.params.submitid;
     let postID = request.params.postid;
     let errors = [];
-    Submit.findOneAndUpdate({_id: submitID, assignmentID: postID}, {
-            mark: request.body.mark.toString(),
-        },
+    Submit.findOneAndUpdate({ _id: submitID, assignmentID: postID }, {
+        mark: request.body.mark.toString(),
+    },
         {
             new: true
         }, (error, value) => {
@@ -285,7 +322,7 @@ router.post('/updateassignmentmark/:submitid/:postid', ensureAuthenticated, (req
             } else {
                 let link = value.classID + postID;
                 request.flash('success_message', 'Number added successfully');
-                response.redirect(`/indvidualassignmentmark/${link}`)
+                response.redirect(`/indvidualassignmentmark/${ link }`)
             }
         });
 });
@@ -301,10 +338,10 @@ router.get('/deletesubmittedassignment/:id', ensureAuthenticated, (request, resp
         if (error) {
             console.log(error)
         } else {
-            fs.unlinkSync(`./public/uploads/${result.files[0].filename}`);
+            fs.unlinkSync(`./public/uploads/${ result.files[0].filename }`);
             let link = result.assignmentID + result.classID;
             request.flash('success_message', 'Your class materials/assignment deleted successfully...');
-            response.redirect(`/submit/${link}`);
+            response.redirect(`/submit/${ link }`);
         }
     });
 });

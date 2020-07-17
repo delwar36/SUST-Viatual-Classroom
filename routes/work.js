@@ -15,6 +15,7 @@ router.get('/showclasswork/:id', ensureAuthenticated, (request, response) => {
     let linkStream = '/showclass/' + request.params.id;
     let linkClassMates = '/showclassmates/' + request.params.id;
     let path_clone = '/showclasswork/' + request.params.id;
+    let showGrade = '/showclassgrade/' + request.params.id;
     const request_path = (request.path);
 
     File.find({
@@ -29,8 +30,10 @@ router.get('/showclasswork/:id', ensureAuthenticated, (request, response) => {
                 linkClassMates,
                 path_clone,
                 result,
+                showGrade,
                 path: request_path,
                 user: request.user,
+                li: 'showclass'
             });
         }
     }).sort({
@@ -42,6 +45,7 @@ router.get('/joinedclasswork/:id', ensureAuthenticated, (request, response) => {
     let linkStream = '/joined/' + request.params.id;
     let linkClassMates = '/joinedclassmates/' + request.params.id;
     let path_clone = '/joinedclasswork/' + request.params.id;
+    let showGrade = '/showclassgrade/' + request.params.id;
     const request_path = (request.path);
     File.find({
         classID: request.params.id,
@@ -55,6 +59,7 @@ router.get('/joinedclasswork/:id', ensureAuthenticated, (request, response) => {
                 linkClassMates,
                 path_clone,
                 result,
+                showGrade,
                 path: request_path,
                 user: request.user,
             });
@@ -72,7 +77,7 @@ router.get('/showclassmates/:id', ensureAuthenticated, (request, response) => {
     let linkStream = '/showclass/' + request.params.id;
     let linkClassWork = '/showclasswork/' + request.params.id;
     let path_clone = '/showclassmates/' + request.params.id;
-
+    let showGrade = '/showclassgrade/' + request.params.id;
     let errors = [];
     Join.find({
         join: classID
@@ -106,6 +111,8 @@ router.get('/showclassmates/:id', ensureAuthenticated, (request, response) => {
                         path_clone,
                         path: request_path,
                         user: request.user,
+                        showGrade,
+                       
                     })
                 }
             }).sort({
@@ -122,7 +129,7 @@ router.get('/joinedclassmates/:id', ensureAuthenticated, (request, response) => 
     let linkStream = '/joined/' + request.params.id;
     let linkClassWork = '/joinedclasswork/' + request.params.id;
     let path_clone = '/joinedclassmates/' + request.params.id;
-
+    let showGrade = '/joinedclassgrade/' + request.params.id;
     let errors = [];
 
     Join.find({
@@ -157,6 +164,8 @@ router.get('/joinedclassmates/:id', ensureAuthenticated, (request, response) => 
                         path_clone,
                         path: request_path,
                         user: request.user,
+                        showGrade,
+                       
                     })
                 }
             }).sort({

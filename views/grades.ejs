@@ -1,55 +1,66 @@
 <%- include('./partials/nav-sidebar') %>
-<div class="container my-5">
+<div class="container">
     <div class="row justify-content-center align-self-center m-4">
         <ul class="nav nav-tabs nav-justified" style="font-family: Ubuntu">
             <li class="nav-item">
-                <a class="nav-link" href="class-materials.html">Stream</a>
+                <% if (path_clone === 'showclass'){ %>
+                <a class="nav-link" href="/showclass/<%= classID %>">Stream</a>
+                <% } else if (path_clone === 'joined'){ %>
+                <a class="nav-link" href="/joined/<%= classID %>">Stream</a>
+                <% } %>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="class-work.html">Class Work</a>
+                <% if (path_clone === 'showclass'){ %>
+                <a class="nav-link" href="/showclasswork/<%= classID %>">Class Work</a>
+                <% } else if (path_clone === 'joined'){ %>
+                <a class="nav-link" href="/joinedclasswork/<%= classID %>">Class Work</a>
+                <% } %>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="class-mates.html">Class mates</a>
+                <% if (path_clone === 'showclass'){ %>
+                <a class="nav-link" href="/showclassmates/<%= classID %>">Students</a>
+                <% } else if (path_clone === 'joined'){ %>
+                <a class="nav-link" href="/joinedclassmates/<%= classID %>">Students</a>
+                <% } %>
             </li>
             <li class="nav-item">
-                <a class="nav-link active" href="class-mates.html">Mark</a>
+                <% if (path_clone === 'showclass'){ %>
+                <a class="nav-link active" href="/showclassgrade/<%= classID %>">Mark</a>
+                <% } else if (path_clone === 'joined'){ %>
+                <a class="nav-link active" href="/joinedclassgrade/<%= classID %>">Mark</a>
+                <% } %>
             </li>
         </ul>
-        
+
     </div>
-    <div class="container my-4">
-        <div class="row" style="margin: 80px;">
-            <div class="col m-2 text-light" style="background-color:whitesmoke">
+    <div class="container">
+        <div class="row"">
+            <div class="col m-2" style="background-color:whitesmoke;border-radius: 3px;">
                 <div class="row m-1">
-                    <div class="col-md-10 m-2">
+                    <div class="col-md-12 m-2">
                         <table class="table">
                             <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Assignment Topic</th>
+                                    <th scope="col">Submitted By</th>
+                                    <th scope="col">Mark</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
+                                <% submit.forEach(submit=>{ %>
+                                <tr>
+                                    <th scope="row">#</th>
+                                    <td><%= submit.assignmentTopic %></td>
+                                    <td><% submit.groups.forEach(user=>{ %>
+                                        <%= user.name%> |
+                                        <% })%>
+                                    </td>
+                                    <td><%= submit.mark %></td>
+                                </tr>
+                                <% })%>
+
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -58,5 +69,3 @@
         </div>
     </div>
 </div>
-
-
