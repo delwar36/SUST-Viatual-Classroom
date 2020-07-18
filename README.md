@@ -6,7 +6,8 @@ This is a virtual classroom app using Node.js, Express, Passport, Mongoose, EJS 
 ### Version: 1.0.0
 
 ## Prerequisite
-```NodeJs
+```
+NodeJs
 NPM
 MongoDB
 ```
