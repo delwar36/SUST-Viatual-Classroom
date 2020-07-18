@@ -11,7 +11,7 @@ To install all node modules packages
 ```sh
 $ npm install
 ```
-
+To start the node server
 ```sh
 $ npm start
 # Or run with Nodemon
