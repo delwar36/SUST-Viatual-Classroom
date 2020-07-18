@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <title>SUST Virtual Classroom - Documentation</title>
+
+    <!-- Styles -->
+    <link href="assets/css/theDocs.all.min.css" rel="stylesheet">
+    <link href="assets/css/custom.css" rel="stylesheet">
+    <link href="assets/css/skin-blue.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Raleway:100,300,400,500%7CLato:300,400' rel='stylesheet'
+        type='text/css'>
+
+    <!-- Favicons -->
+    <link rel="icon" href="assets/img/favicon.png">
+</head>
+
+<body data-spy="scroll" data-target=".sidebar" data-offset="200">
+
+
+    <!-- Sidebar -->
+    <aside class="sidebar sidebar-boxed sidebar-dark">
+
+        <a class="sidebar-brand" href="index.html"><img src="assets/img/logo-sidebar.png" alt="logo"
+                style="width: 100px;"></a>
+
+        <ul class="nav sidenav dropable">
+            <li>
+                <a href="#prerequisite">Prerequisites</a>
+                <ul>
+                    <li><a href="#prerequisite-nodejs">NodeJS</a></li>
+                    <li><a href="#prerequisite-npm">NPM</a></li>
+                    <li><a href="#prerequisite-mongodb">MongoDB</a></li>
+                </ul>
+            </li>
+            <li><a href="#upgrade">Deployment</a></li>
+            <li>
+                <a href="#smtp">SMTP</a>
+            </li>
+
+            <li>
+                <a href="#webrtc">WebRTC</a>
+            </li>
+
+            <li>
+                <a href="#social-login">Social Login</a>
+                <ul>
+                    <li><a href="#facebook">Facebook</a></li>
+                    <li><a href="#linkedin">LinkedIn</a></li>
+                    <li><a href="#twitter">Twitter</a></li>
+                    <li><a href="#google">Google</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#languages">Languages</a>
+            </li>
+            <li>
+                <a href="#how-to">How To</a>
+            </li>
+            <li>
+                <a href="#sms-apis">APIs</a>
+            </li>
+
+            <li>
+                <a href="#credits">Credits</a>
+            </li>
+            <li>&nbsp;</li>
+            <li>&nbsp;</li>
+            <li>&nbsp;</li>
+        </ul>
+
+    </aside>
+    <!-- END Sidebar -->
+
+
+    <header class="site-header navbar-transparent">
+
+        <!-- Top navbar & branding -->
+        <nav class="navbar navbar-default">
+            <div class="container-fluid">
+
+                <!-- Toggle buttons and brand -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="true" aria-controls="navbar">
+                        <span class="glyphicon glyphicon-option-vertical"></span>
+                    </button>
+
+                    <button type="button" class="navbar-toggle for-sidebar" data-toggle="offcanvas">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+                <!-- END Toggle buttons and brand -->
+
+                <!-- Top navbar -->
+                <div id="navbar" class="navbar-collapse collapse" aria-expanded="true" role="banner">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="changelog.html">Changelog</a></li>
+                        <li><a href="#">User Manual</a></li>
+                        <!-- <li class="hero"><a href="https://1.envato.market/30rEB">Purchase</a></li> -->
+                    </ul>
+                </div>
+                <!-- END Top navbar -->
+
+            </div>
+        </nav>
+        <!-- END Top navbar & branding -->
+
+        <!-- Banner -->
+        <div class="banner auto-size bg-primary">
+            <div class="container-fluid text-white">
+                <h1><strong>SUST Virtual Classroom</strong> documentation</h1>
+                <h5>For a quick and easy installation we created for you this technical support.</h5>
+            </div>
+        </div>
+        <!-- END Banner -->
+
+    </header>
+
+    <main class="container-fluid">
+
+        <!-- Main content -->
+        <article class="main-content" role="main">
+
+            <p class="lead">Please use the left navigation bar to browse through this support. Let’s go !</p>
+
+            <section>
+                <h2 id="prerequisite">Prerequisites</h2>
+
+                <strong>Before starting, please make sure you have the components bellow enable on your server</strong>
+
+                <pre><code>NodeJs
+NPM
+MongoDB
+            </code></pre>
+
+
+
+                <h3 id="prerequisite-nodejs"><strong>Installation of NodeJs</strong></h3>
+                <p>Follow the link <a href="https://nodejs.org/en/download/">Install NodeJs</a></p>
+
+                <h3 id="prerequisite-npm"><strong>Installation of NPM</strong></h3>
+                <p>Follow the link <a href="https://www.npmjs.com/get-npm">Install NPM</a></p>
+
+                <h3 id="prerequisite-mongodb"><strong>Installation of MongoDB</strong></h3>
+                <p>Follow the link <a href="https://docs.mongodb.com/manual/installation/">Install Mongodb</a></p>
+
+
+            </section>
+
+            <section>
+                <h2 id="upgrade">Deploy in your local machine</h2>
+                <pre><code>
+                    <b>To install all node modules packages</b>
+```sh
+$ npm install
+```
+<b>To start the node server</b>
+```sh
+$ npm start
+<b>Or run with Nodemon</b>
+$ npm run dev
+
+<b>Visit</b> <u>http://localhost:3000</u>
+                </code></pre>
+            </section>
+
+            <section>
+                <h2 id="smtp">SMTP</h2>
+
+                <strong>What is SMTP ?</strong><br>
+                <p>Short for Simple Mail Transfer Protocol, a protocol for sending e-mail messages between servers. Most
+                    e-mail systems that send mail over the Internet use SMTP to send messages from one server to
+                    another; the messages can then be retrieved with an e-mail client using either POP or IMAP. In
+                    addition, SMTP is generally used to send messages from a mail client to a mail server. This is why
+                    you need to specify both the POP or IMAP server and the SMTP server when you configure your e-mail
+                    application.</p>
+                <strong>In short it used to send emails to your site users..!!</strong>
+                You can use any SMTP service provider.
+                <ul>
+                    <li>Your own hosting SMTP server</li>
+                    <li>Mandrill</li>
+                    <li>Amazon SES</li>
+                    <li>Mailgun</li>
+                    <li>Sparkpost</li>
+                    <li>Gmail, Yahoo or some other email provider</li>
+                </ul>
+                <p>Got to the <code>/.env</code> file and fill up the smtp provider info:</p>
+                <pre><code>                    
+EMAIL = "PROVIDER_EMAIL"
+PASSWORD = "EMAIL_PASSWORD"
+                </code></pre>
+                <strong>Please note that some hosting providers blocks port 25 or 465 in that case you have change your
+                    SMTP email server or contact your hosting provider</strong>
+
+            </section>
+
+
+
+
+
+            <section>
+                <h2 id="social-login">Social Login</h2>
+                
+                <h3 id="facebook">Facebook</h3>
+                <ol>
+                    <li>Register for regular Facebook account, if you don't already have one.</li>
+                    <li>Open <a href="https://developers.facebook.com/" target="_blank" rel="noopener noreferrer">this
+                            url</a>, and <strong>Create a New App.</strong></li>
+                    <li>Get the new app settings.</li>
+                </ol>
+                <p>We will start implementing facebook login to the site soon</p>
+
+
+                <h3 id="linkedin">LinkedIn</h3>
+                <ol>
+                    <li>Register for regular LinkedIn account, if you don't already have one.</li>
+                    <li>Open <a href="https://www.linkedin.com/developer/apps" target="_blank"
+                            rel="noopener noreferrer">this url</a>, and <strong>Create a New App.</strong></li>
+                    <li>Get the new app settings.</li>
+                </ol>
+                <p>We will start implementing LinkedIn login to the site soon</p>
+
+                <h3 id="twitter">Twitter</h3>
+                <ol>
+                    <li>Register for regular Twitter account, if you don't already have one.</li>
+                    <li>Open <a href="https://apps.twitter.com/" target="_blank" rel="noopener noreferrer">this url</a>,
+                        and <strong>Create a New App.</strong></li>
+                    <li>Get the new app settings.</li>
+                </ol>
+                <p>We will start implementing Twitter login to the site soon</p>
+
+                <h3 id="google">Google</h3>
+                <ol>
+                    <li>Register for regular Google account, if you don't already have one.</li>
+                    <li>Open <a href="https://console.developers.google.com/" target="_blank"
+                            rel="noopener noreferrer">this url</a>, and <strong>Create a New App.</strong></li>
+                    <li>Get the new app settings.</li>
+                </ol>
+                <p>We will start implementing google login to the site soon</p>
+
+            </section>
+
+
+
+            <section>
+                <h2 id="languages">Languages</h2>
+
+
+                <p>We will start working soon on this section</p>
+
+            </section>
+
+
+            <section>
+                <h2 id="credits">Credits</h2>
+                <ul>
+                    <li>NodeJs – <a href="https://nodejs.org/" target="_blank">https://nodejs.org/</a>
+                    </li> <li>MongoDB – <a href="https://www.mongodb.com/" target="_blank">https://www.mongodb.com/</a></li>
+                    <li>and more...</li>
+                </ul>
+            </section>
+
+        </article>
+        <!-- END Main content -->
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container-fluid">
+            <a id="scroll-up" href="#"><i class="fa fa-angle-up"></i></a>
+
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <p>Copyright &copy;
+                        <script>document.write(new Date().getFullYear())</script>. All right reserved</p>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <ul class="footer-menu">
+                        <li><a href="changelog.html">Changelog</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- END Footer -->
+
+    <!-- Scripts -->
+    <script src="assets/js/theDocs.all.min.js"></script>
+
+</body>
+
+</html>
