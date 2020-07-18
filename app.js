@@ -14,8 +14,6 @@ const work = require('./routes/work');
 const assignment = require('./routes/assignment');
 const upload = require('./routes/upload');
 
-
-
 const expressLayout = require('express-ejs-layouts');
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -31,13 +29,14 @@ const key = require('./configuration/keys');
 const database = key.mongoURI;
 
 
-// config public folder
 app.use('/public', express.static('public'));
 
 // Public Folder
-app.use(express.static('./public'));
+// app.use(express.static('./public'));
 
-// app.use('/public', express.static(__dirname + '/public'));
+
+// config public folder
+// app.use(express.static(__dirname + '/public'));
 
 
 // CONNECT TO MONGOOSE
@@ -98,4 +97,4 @@ app.use('/user', user);
 
 const PORT = process.env.PORT || 3000;
 
-app.listen(PORT, console.log(`Server is started on PORT ${PORT}`));
+app.listen(PORT, console.log(`Server is started on PORT ${ PORT }`));
