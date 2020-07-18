@@ -7,7 +7,7 @@ This is a virtual classroom app using Node.js, Express, Passport, Mongoose, EJS 
 
 ### Usage
 
-### To install all node modules packages
+To install all node modules packages
 ```sh
 $ npm install
 ```
