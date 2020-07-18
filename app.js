@@ -98,3 +98,11 @@ app.use('/user', user);
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, console.log(`Server is started on PORT ${ PORT }`));
+
+
+//API routes
+const userRoute = require('./api/routes/users')
+const classRoute = require('./api/routes/classes')
+
+app.use('/api/users', userRoute);
+app.use('/api/classes', classRoute);
