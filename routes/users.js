@@ -17,10 +17,10 @@ const User = require('../models/User');
 
 
 let smtpTransport = nodeMailer.createTransport({
-    service: "Gmail",
+    service: "Gmail",   
     auth: {
         user: process.env.EMAIL,
-        pass: process.env.PASSWORD
+        pass: process.env.PASSWORD,
     }
 });
 
@@ -112,6 +112,7 @@ router.post('/sign-up', (request, response) => {
                     newUser.save().then(result => {
                         console.log(result.verificationCode)
                         mailOptions = {
+                            from: "SUST Virtual Classroom <process.env.EMAIL>",
                             to: email,
                             subject: "Please confirm your Gmail account by Verification Code",
                             html: "Hello,<br> Please give the code value to verify your email.<br>" + "<h1>" + result.verificationCode + "</h1>"
