@@ -83,13 +83,13 @@ app.use((request, response, next) => {
 
 
 // ROUTES
-
+app.use(index);
 app.use(upload);
 app.use(assignment);
 app.use(work);
 app.use(show);
 app.use(handle);
-app.use(index);
+
 app.use(join);
 app.use(task);
 app.use('/user', user);
