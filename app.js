@@ -100,7 +100,7 @@ const PORT = process.env.PORT || 8889;
 app.listen(PORT, console.log(`Server is started on PORT ${ PORT }`));
 
 
-//API routes
+//API Resources
 const userRoute = require('./api/routes/users')
 const classRoute = require('./api/routes/classes')
 
